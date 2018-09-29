@@ -1,4 +1,4 @@
 ---
 heroImage: /graukogel.jpg
-heroText: "Frühjahr 2020"
+heroText: "30. Mai 2020"
 ---
