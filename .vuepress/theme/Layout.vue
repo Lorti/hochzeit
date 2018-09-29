@@ -1,7 +1,7 @@
 <template>
     <div class="theme-container">
         <div class="hero" :style="{ backgroundImage: `url(/graukogel.jpg)` }">
-            <h1>Teresa & Manuel</h1>
+            <h1>Teresa & Manuel<br><small>30.5.20</small></h1>
         </div>
         <Content :custom="false"/>
     </div>
@@ -41,7 +41,18 @@
                 width: auto;
                 top: 50vh;
                 left: 25vh;
+                transform: translateY(-50%);
             }
+        }
+
+        h1 {
+            font-size: 3rem;
+            line-height: 1;
+        }
+
+        small {
+            font-size: 2rem;
+            line-height: 1;
         }
     }
 
