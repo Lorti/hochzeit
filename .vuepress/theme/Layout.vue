@@ -1,6 +1,9 @@
 <template>
-    <div class="layout" :style="{ backgroundImage: `url(${data.heroImage})` }">
-        <h1>{{ data.heroText }}</h1>
+    <div class="theme-container">
+        <div class="hero" :style="{ backgroundImage: `url(/graukogel.jpg)` }">
+            <h1>Teresa & Manuel</h1>
+        </div>
+        <Content :custom="false"/>
     </div>
 </template>
 
@@ -14,31 +17,36 @@
     }
 </script>
 
+<style src="../../node_modules/vuepress/lib/default-theme/styles/theme.styl" lang="stylus"></style>
+
 <style lang="scss">
     @import url('https://fonts.googleapis.com/css?family=Sacramento');
-    html, body, #app, .layout {
-        margin: 0;
-        padding: 0;
-        height: 100vh;
-    }
-    .layout {
+
+    .hero {
         background-position: 61% center;
         background-size: cover;
-    }
-    h1 {
-        position: absolute;
-        top: 5vh;
-        margin: 0;
-        width: 100%;
-        text-align: center;
-        font-family: 'Sacramento', cursive;
-        font-weight: lighter;
-        color: #fff;
+        height: 100vh;
 
-        @media (min-width: 1024px) {
-            width: auto;
-            top: 50vh;
-            left: 25vh;
+        h1 {
+            position: absolute;
+            top: 5vh;
+            margin: 0;
+            width: 100%;
+            text-align: center;
+            font-family: 'Sacramento', cursive;
+            font-weight: lighter;
+            color: #fff;
+
+            @media (min-width: 1024px) {
+                width: auto;
+                top: 50vh;
+                left: 25vh;
+            }
         }
+    }
+
+    .content > *:first-child {
+        margin-top: 1rem !important;
+        padding-top: 0 !important;
     }
 </style>
