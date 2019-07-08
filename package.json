@@ -1,11 +1,16 @@
 {
   "scripts": {
-    "dev": "vuepress dev",
-    "build": "vuepress build"
+    "page:dev": "vuepress dev",
+    "page:build": "vuepress build",
+    "lambda:dev": "netlify-lambda serve lambda",
+    "lambda:build": "netlify-lambda build lambda",
+    "build": "npm run page:build && npm run lambda:build"
   },
   "dependencies": {
+    "netlify-lambda": "^1.4.13",
     "node-sass": "^4.9.3",
     "sass-loader": "^7.1.0",
+    "storyblok-node-client": "^1.0.2",
     "vuepress": "^0.14.2"
   }
 }
