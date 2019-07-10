@@ -1,9 +1,9 @@
 <template>
-    <div class="theme-container">
+    <div>
         <div class="hero" :style="{ backgroundImage: `url(/graukogel.jpg)` }">
             <h1>Teresa & Manuel<br><small>30.5.20</small></h1>
         </div>
-        <Content :custom="false"/>
+        <Content class="content" :custom="false"/>
     </div>
 </template>
 
@@ -17,7 +17,7 @@
     }
 </script>
 
-<style src="../../node_modules/vuepress/lib/default-theme/styles/theme.styl" lang="stylus"></style>
+<style src="../../node_modules/@vuepress/theme-default/styles/index.styl" lang="stylus"></style>
 
 <style lang="scss">
     @import url('https://fonts.googleapis.com/css?family=Sacramento');
@@ -56,8 +56,10 @@
         }
     }
 
-    .content > *:first-child {
-        margin-top: 1rem !important;
-        padding-top: 0 !important;
+    .content {
+        display: block;
+        margin: 0 auto;
+        padding: 2rem;
+        max-width: 48rem;
     }
 </style>
