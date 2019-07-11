@@ -1,17 +1,16 @@
 <template>
-    <div>
-        <fieldset>
+    <form>
+        <fieldset v-show="!guest">
             <input type="text" v-model="password">
-            <button v-if="password.length" @click="login">Anmelden</button>
+            <button v-if="password.length" @click.prevent="login">Anmelden</button>
         </fieldset>
+
         <fieldset v-if="guest">
-            <label>
-                Name
-                <input type="text" v-model="guest.name">
-            </label>
+            Hallo {{ guest.name }}!
+            <input type="hidden" v-model="guest.id">
             <label>
                 E-Mail
-                <input type="text" v-model="guest.email">
+                <input type="email" v-model="guest.email">
             </label>
             <label>
                 Telefonnummer
@@ -27,13 +26,17 @@
                 Anmerkungen
                 <textarea v-model="guest.message"></textarea>
             </label>
-            <button>Änderungen speichern</button>
+            <button @click.prevent="update">Änderungen speichern</button>
         </fieldset>
-    </div>
+    </form>
 </template>
 
 <script>
     import axios from 'axios';
+
+    const url = process.env.NODE_ENV === 'production' ?
+        '/.netlify/functions/guest' :
+        'http://localhost:9000/guest';
 
     export default {
         data() {
@@ -42,19 +45,26 @@
                 guest: null,
             };
         },
+        computed: {
+            headers() {
+                return {
+                    Authorization: `Token ${this.password.toUpperCase()}`,
+                };
+            },
+        },
         methods: {
             async login() {
                 try {
-                    const result = await axios.post(
-                        process.env.NODE_ENV === 'production' ?
-                            '/.netlify/functions/guest' :
-                            'http://localhost:9000/guest',
-                        { password: this.password.toUpperCase() }
-                    );
+                    const result = await axios.get(url, { headers: this.headers });
                     this.guest = result.data;
                 } catch (error) {
                     this.guest = null;
                 }
+            },
+            async update() {
+                await axios.post(url, {
+                    ...this.guest,
+                }, { headers: this.headers });
             }
         }
     }

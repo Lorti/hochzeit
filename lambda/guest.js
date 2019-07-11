@@ -1,49 +1,116 @@
-const StoryblokClient = require('storyblok-node-client');
-
-let Storyblok = new StoryblokClient({
-    privateToken: process.env.STORYBLOK_TOKEN,
-});
+const StoryblokClient = require('storyblok-js-client');
 
 const headers = {
     'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'POST',
-    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'GET, POST',
+    'Access-Control-Allow-Headers': 'Authorization, Content-Type',
     'Content-Type': 'application/json',
 };
 
 exports.handler = function (event, context, callback) {
-    if (event.httpMethod === 'OPTIONS') {
-        callback(null, {
-            statusCode: 204,
-            headers,
-        });
-        return;
+    function password() {
+        return event.headers.authorization.substring(6);
     }
 
-    const { password } = JSON.parse(event.body);
-
-    Storyblok
-        .get('stories', {
-            'starts_with': 'guests',
-        })
-        .then((response) => {
-            const guests = response.body.stories;
-            const result = guests.find(guest => guest.content.password === password);
-
-            callback(null, {
-                statusCode: !result ? 400 : 200,
-                headers,
-                body: JSON.stringify(!result ? {} : {
-                    name: result.name,
-                    email: result.content.email,
-                    phone: result.content.phone,
-                    attending: result.content.attending,
-                    vegetarian: result.content.vegetarian,
-                    message: result.content.message,
-                }, undefined, 2),
-            });
-        })
-        .catch((error) => {
-            callback(error);
+    function respond(statusCode, body = {}) {
+        callback(null, {
+            statusCode,
+            headers,
+            body: JSON.stringify(body, undefined, 2),
         });
+    }
+
+    function get() {
+        const Storyblok = new StoryblokClient({
+            accessToken: process.env.STORYBLOK_ACCESS_TOKEN,
+        });
+
+        Storyblok
+            .get('cdn/stories', {
+                'starts_with': 'guests',
+            })
+            .then((response) => {
+                const guests = response.data.stories;
+                const guest = guests.find(guest => guest.content.password === password());
+
+                if (guest) {
+                    respond(200, {
+                        name: guest.name,
+                        id: guest.id,
+                        email: guest.content.email,
+                        phone: guest.content.phone,
+                        attending: guest.content.attending,
+                        vegetarian: guest.content.vegetarian,
+                        message: guest.content.message,
+                    });
+                } else {
+                    respond(404);
+                }
+            })
+            .catch((error) => {
+                callback(error);
+            });
+    }
+
+    async function post() {
+        const {
+            id,
+            email,
+            phone,
+            attending,
+            vegetarian,
+            message,
+        } = JSON.parse(event.body);
+
+        const Storyblok = new StoryblokClient({
+            oauthToken: process.env.STORYBLOK_OAUTH_TOKEN,
+        });
+
+        let story;
+        try {
+            const result = await Storyblok.get(`spaces/${process.env.STORYBLOK_SPACE_ID}/stories/${id}`, {});
+            story = result.data.story;
+        } catch (error) {
+            console.log(error);
+        }
+
+        if (story.content.password !== password()) {
+            respond(403);
+            return;
+        }
+
+        try {
+            await Storyblok.put(`spaces/${process.env.STORYBLOK_SPACE_ID}/stories/${id}`, {
+                story: {
+                    name: story.name,
+                    slug: story.slug,
+                    id,
+                    content: {
+                        _uid: story.content._uid,
+                        component: story.content.component,
+                        password: story.content.password,
+                        email,
+                        phone,
+                        attending,
+                        vegetarian,
+                        message,
+                    },
+                },
+                publish: 1,
+            });
+            respond(204);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const methods = {
+        OPTIONS() {
+            respond(204);
+        },
+        GET: get,
+        POST: post,
+    };
+
+    methods[event.httpMethod]();
 };

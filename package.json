@@ -11,7 +11,7 @@
     "netlify-lambda": "^1.4.13",
     "node-sass": "^4.12.0",
     "sass-loader": "^7.1.0",
-    "storyblok-node-client": "^1.0.2",
+    "storyblok-js-client": "^1.0.27",
     "vuepress": "^1.0.2"
   }
 }
