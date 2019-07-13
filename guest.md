@@ -1,3 +1,3 @@
 ---
-layout: Login
+layout: Guest
 ---
