@@ -1,10 +1,10 @@
 {
   "scripts": {
-    "page:dev": "vuepress dev",
-    "page:build": "vuepress build",
+    "site:dev": "vuepress dev",
+    "site:build": "vuepress build",
     "lambda:dev": "netlify-lambda serve lambda",
     "lambda:build": "netlify-lambda build lambda",
-    "build": "npm run page:build && npm run lambda:build"
+    "build": "npm run site:build && npm run lambda:build"
   },
   "dependencies": {
     "axios": "^0.19.0",

@@ -51,12 +51,6 @@
 </template>
 
 <script>
-    import axios from 'axios';
-
-    const url = process.env.NODE_ENV === 'production' ?
-        '/.netlify/functions/guest' :
-        'http://localhost:9000/guest';
-
     export default {
         data() {
             return {
@@ -76,7 +70,7 @@
             async login() {
                 this.isLoading = true;
                 try {
-                    const result = await axios.get(url, { headers: this.headers });
+                    const result = await this.$axios.get('/guest', { headers: this.headers });
                     this.guest = result.data;
                 } catch (error) {
                     this.guest = null;
@@ -85,7 +79,7 @@
             },
             async update() {
                 this.isLoading = true;
-                await axios.post(url, {
+                await this.$axios.post('/guest', {
                     ...this.guest,
                 }, { headers: this.headers });
                 this.isLoading = false;

@@ -1,11 +1,5 @@
 const StoryblokClient = require('storyblok-js-client');
-
-const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET',
-    'Access-Control-Allow-Headers': 'Authorization, Content-Type',
-    'Content-Type': 'application/json',
-};
+const headers = require('./util/cors.js');
 
 exports.handler = function (event, context, callback) {
     function password() {
