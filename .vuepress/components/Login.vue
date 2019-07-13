@@ -1,33 +1,52 @@
 <template>
-    <form>
-        <fieldset v-show="!guest">
-            <input type="text" v-model="password">
-            <button v-if="password.length" @click.prevent="login">Anmelden</button>
-        </fieldset>
+    <form autocomplete="off">
+        <div v-if="!guest">
+            <input
+                    type="text"
+                    :value="password.toUpperCase()"
+                    @input="password = $event.target.value.toUpperCase()"
+                    autofocus
+            >
+            <button
+                    v-if="password.length"
+                    @click.prevent="login"
+                    :disabled="isLoading"
+            >
+                Anmelden
+            </button>
+        </div>
 
-        <fieldset v-if="guest">
+        <div v-else>
             Hallo {{ guest.name }}!
+            <input type="hidden" v-model="password">
             <input type="hidden" v-model="guest.id">
             <label>
-                E-Mail
-                <input type="email" v-model="guest.email">
+                <span>E-Mail</span>
+                <input type="email" v-model="guest.email" autocomplete="email" autocapitalize="none">
             </label>
             <label>
-                Telefonnummer
-                <input type="text" v-model="guest.phone">
+                <span>Telefonnummer</span>
+                <input type="tel" v-model="guest.phone" autocomplete="tel" autocapitalize="none">
             </label>
             <label>
-                <input type="checkbox" v-model="guest.attending"> Zusage?
+                <input type="checkbox" v-model="guest.attending"> Ja, ich/wir kommen
             </label>
             <label>
-                <input type="checkbox" v-model="guest.vegetarian"> Vegetarisch?
+                <input type="checkbox" v-model="guest.vegetarian">
+                Ich möchte eine vegetarische Hauptspeise
+                <small>(restliche Gänge sind ohnehin vegetarisch)</small>
             </label>
             <label>
-                Anmerkungen
-                <textarea v-model="guest.message"></textarea>
+                <span>Anmerkungen</span>
+                <textarea v-model="guest.message" rows="5" cols="20"></textarea>
             </label>
-            <button @click.prevent="update">Änderungen speichern</button>
-        </fieldset>
+            <button
+                    @click.prevent="update"
+                    :disabled="isLoading"
+            >
+                Änderungen speichern
+            </button>
+        </div>
     </form>
 </template>
 
@@ -43,6 +62,7 @@
             return {
                 password: '',
                 guest: null,
+                isLoading: false,
             };
         },
         computed: {
@@ -54,17 +74,21 @@
         },
         methods: {
             async login() {
+                this.isLoading = true;
                 try {
                     const result = await axios.get(url, { headers: this.headers });
                     this.guest = result.data;
                 } catch (error) {
                     this.guest = null;
                 }
+                this.isLoading = false;
             },
             async update() {
+                this.isLoading = true;
                 await axios.post(url, {
                     ...this.guest,
                 }, { headers: this.headers });
+                this.isLoading = false;
             }
         }
     }
@@ -73,5 +97,9 @@
 <style lang="scss" scoped>
     label {
         display: block;
+
+        span {
+            display: block;
+        }
     }
 </style>
