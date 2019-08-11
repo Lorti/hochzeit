@@ -33,6 +33,7 @@ exports.handler = function (event, context, callback) {
                         id: group.id,
                         email: group.content.email,
                         guests: group.content.guests,
+                        guests_editable: group.content.guests_editable,
                         message: group.content.message,
                     });
                 } else {
@@ -54,6 +55,7 @@ exports.handler = function (event, context, callback) {
             name: String(guest.name),
             attending: Boolean(guest.attending),
             vegetarian: Boolean(guest.vegetarian),
+            custom: Boolean(guest.custom),
         }));
         const message = String(request.message);
 
@@ -85,6 +87,7 @@ exports.handler = function (event, context, callback) {
                         password: story.content.password,
                         email,
                         guests,
+                        guests_editable: story.content.guests_editable,
                         message,
                     },
                 },

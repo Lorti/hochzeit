@@ -24,8 +24,14 @@
                 <span>E-Mail</span>
                 <input type="email" v-model="group.email" autocomplete="email" autocapitalize="none">
             </label>
-            <fieldset v-for="guest in group.guests">
-                {{ guest.name }}
+            <template v-for="guest in group.guests">
+                <label v-if="guest.custom">
+                    <span>Name der Begleitung</span>
+                    <input type="email" v-model="guest.name">
+                </label>
+                <template v-else>
+                    {{ guest.name }}
+                </template>
                 <label>
                     <input type="checkbox" v-model="guest.attending"> Ja, ich komme gerne zu eurer Hochzeit
                 </label>
@@ -34,14 +40,20 @@
                     Ich möchte eine vegetarische Hauptspeise
                     <small>(restliche Gänge sind ohnehin vegetarisch)</small>
                 </label>
-            </fieldset>
+            </template>
+            <button
+                v-if="showPlusOneButton"
+                @click.prevent="addPlusOneGuest"
+            >
+                Ich möchte eine Begleitung mitnehmen …
+            </button>
             <label>
                 <span>Anmerkungen</span>
                 <textarea v-model="group.message" rows="5" cols="20"></textarea>
             </label>
             <button
-                    @click.prevent="update"
-                    :disabled="isLoading"
+                @click.prevent="update"
+                :disabled="isLoading"
             >
                 Änderungen speichern
             </button>
@@ -64,6 +76,9 @@
                     Authorization: `Token ${this.password.toUpperCase()}`,
                 };
             },
+            showPlusOneButton() {
+                return this.group.guests_editable && !this.group.guests.find(guest => guest.custom);
+            },
         },
         methods: {
             async login() {
@@ -82,7 +97,15 @@
                     ...this.group,
                 }, { headers: this.headers });
                 this.isLoading = false;
-            }
+            },
+            addPlusOneGuest() {
+                this.group.guests.push({
+                    name: '',
+                    attending: true,
+                    vegetarian: false,
+                    custom: true
+                });
+            },
         }
     }
 </script>
