@@ -86,20 +86,7 @@
 </script>
 
 <style lang="scss" scoped>
-    table {
-        width: 100%;
-    }
-
-    th, td {
-        padding: .5rem .25rem;
+    td {
         text-align: center;
-    }
-
-    tr {
-        background: hsl(0, 0%, 95%);
-
-        &:hover {
-            background: hsl(0, 0%, 90%);
-        }
     }
 </style>
