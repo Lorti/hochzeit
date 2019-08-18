@@ -3,10 +3,11 @@
 </template>
 
 <style lang="scss">
-    $main-color: #7a0727;
+    @import "./config";
 
     html {
         font-family: 'Lato', sans-serif;
+        cursor: default;
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -23,12 +24,17 @@
         transition: background .25s;
 
         &:hover {
-            background: lighten($main-color, 5%);
+            background: $hover-color;
             cursor: pointer;
         }
     }
 
     .header-anchor {
         display: none;
+    }
+
+    ::selection {
+        color: #fff;
+        background: $main-color;
     }
 </style>

@@ -1,21 +1,24 @@
 <template>
     <form autocomplete="off">
-        <div v-if="!group">
+        <section class="code" v-if="!group">
+            <p>Willkommen auf unserer Hochzeits-Website!</p>
+            <p>Auf unserer Einladung steht ein Code, den du im unten stehenden Feld eingeben kannst, um dich anzumelden.</p>
             <input
-                    type="text"
-                    :value="password.toUpperCase()"
-                    @input="password = $event.target.value.toUpperCase()"
-                    autofocus
+                class="code__input"
+                type="text"
+                :value="password.toUpperCase()"
+                @input="password = $event.target.value.toUpperCase()"
+                autofocus
             >
             <button
-                    @click.prevent="login"
-                    :disabled="isLoading"
+                @click.prevent="login"
+                :disabled="isLoading"
             >
                 Anmelden
             </button>
-        </div>
+        </section>
 
-        <div v-else>
+        <section v-else>
             Hallo {{ group.name }}!
             <input type="hidden" v-model="password">
             <input type="hidden" v-model="group.id">
@@ -56,7 +59,7 @@
             >
                 Änderungen speichern
             </button>
-        </div>
+        </section>
     </form>
 </template>
 
@@ -110,11 +113,40 @@
 </script>
 
 <style lang="scss" scoped>
+    @import "../theme/config";
+
+    section {
+        text-align: center;
+    }
+
     label {
         display: block;
 
         span {
             display: block;
+        }
+    }
+
+    .code {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 20rem;
+    }
+
+    .code__input {
+        display: block;
+        margin-bottom: 1rem;
+        border: none;
+        border-bottom: 2px solid black;
+        width: 100%;
+        font-size: 2rem;
+        font-family: monospace;
+        text-align: center;
+
+        &:focus {
+            outline: none;
+            border-color: $main-color;
+            color: $main-color;
         }
     }
 </style>
