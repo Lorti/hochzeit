@@ -1,65 +1,34 @@
 <template>
-    <div>
-        <div class="hero" :style="{ backgroundImage: `url(/graukogel.jpg)` }">
-            <h1>Teresa & Manuel<br><small>30.5.20</small></h1>
-        </div>
-        <Content class="content" :custom="false"/>
-    </div>
+    <Content class="content" :custom="false"/>
 </template>
 
-<script>
-    export default {
-        computed: {
-            data() {
-                return this.$page.frontmatter
-            },
-        }
-    }
-</script>
-
-<style src="../../node_modules/@vuepress/theme-default/styles/index.styl" lang="stylus"></style>
-
 <style lang="scss">
-    @import url('https://fonts.googleapis.com/css?family=Sacramento');
+    $main-color: #7a0727;
 
-    .hero {
-        background-position: 61% center;
-        background-size: cover;
-        height: 100vh;
+    html {
+        font-family: 'Lato', sans-serif;
+    }
 
-        h1 {
-            position: absolute;
-            top: 5vh;
-            margin: 0;
-            width: 100%;
-            text-align: center;
-            font-family: 'Sacramento', cursive;
-            font-weight: lighter;
-            color: #fff;
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Abril Fatface', cursive;
+    }
 
-            @media (min-width: 1024px) {
-                width: auto;
-                top: 50vh;
-                left: 25vh;
-                transform: translateY(-50%);
-            }
-        }
+    button {
+        border: none;
+        padding: .5rem 1rem;
+        font-size: inherit;
+        color: #fff;
+        background: $main-color;
+        border-radius: 3px;
+        transition: background .25s;
 
-        h1 {
-            font-size: 3rem;
-            line-height: 1;
-        }
-
-        small {
-            font-size: 2rem;
-            line-height: 1;
+        &:hover {
+            background: lighten($main-color, 5%);
+            cursor: pointer;
         }
     }
 
-    .content {
-        display: block;
-        margin: 0 auto;
-        padding: 2rem;
-        max-width: 48rem;
+    .header-anchor {
+        display: none;
     }
 </style>

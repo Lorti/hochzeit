@@ -1,6 +1,10 @@
----
-home: true
----
+# Teresa & Manuel
+
+Willkommen auf unserer Hochzeits-Website!
+
+Auf unserer Einladung steht ein Code, den du im unten stehenden Feld eingeben kannst, um dich anzumelden.
+
+<Group />
 
 ## Wann?
 

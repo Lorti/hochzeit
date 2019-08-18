@@ -8,7 +8,6 @@
                     autofocus
             >
             <button
-                    v-if="password.length"
                     @click.prevent="login"
                     :disabled="isLoading"
             >
