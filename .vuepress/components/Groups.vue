@@ -8,23 +8,27 @@
             >
             <button
                     v-if="password.length"
-                    @click.prevent="login"
+                    @click.prevent="fetch"
                     :disabled="isLoading"
             >
                 Anmelden
             </button>
         </template>
         <template v-else>
+            <h1>
+                {{ guests.length }} Gäste ({{ groups.length }} Gruppen)
+                <button @click="fetch" :disabled="isLoading">Liste aktualisieren</button>
+            </h1>
             <table>
                 <tr>
                     <th>ID</th>
                     <th>Gruppe</th>
-                    <th>Name</th>
                     <th>E-Mail</th>
+                    <th>Gast</th>
                     <th>Zusage?</th>
                     <th>Vegetarisch?</th>
                     <th>+1?</th>
-                    <th>Gast darf +1 hinzufügen</th>
+                    <th>Gruppe darf +1 hinzufügen</th>
                     <th>Anmerkungen</th>
                 </tr>
                 <tr v-for="guest in guests">
@@ -75,7 +79,7 @@
             },
         },
         methods: {
-            async login() {
+            async fetch() {
                 this.isLoading = true;
                 const result = await this.$axios.get('/groups', { headers: this.headers });
                 this.groups = result.data;
@@ -84,9 +88,3 @@
         }
     }
 </script>
-
-<style lang="scss" scoped>
-    td {
-        text-align: center;
-    }
-</style>
