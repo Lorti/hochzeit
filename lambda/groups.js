@@ -33,6 +33,7 @@ exports.handler = function (event, context, callback) {
                 const guests = response.data.stories.map((group) => ({
                     id: group.id,
                     name: group.name,
+                    password: group.content.password,
                     email: group.content.email,
                     guests: group.content.guests,
                     guests_editable: group.content.guests_editable,

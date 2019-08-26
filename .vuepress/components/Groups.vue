@@ -39,6 +39,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Gruppe</th>
+                    <th>Code</th>
                     <th>E-Mail</th>
                     <th>Gast</th>
                     <th>Zusage?</th>
@@ -82,6 +83,7 @@
                         accumulator.push({
                             id: group.id,
                             group: group.name,
+                            password: group.password,
                             email: group.email,
                             name: guest.name,
                             attending: guest.attending,
