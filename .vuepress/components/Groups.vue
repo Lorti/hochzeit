@@ -16,9 +16,25 @@
         </template>
         <template v-else>
             <h1>
-                {{ guests.length }} Gäste ({{ groups.length }} Gruppen)
+                Gästeliste
                 <button @click="fetch" :disabled="isLoading">Liste aktualisieren</button>
+                <select v-model="order">
+                    <option value="group">Gruppe</option>
+                    <option value="name">Name</option>
+                    <option value="email">E-Mail</option>
+                    <option value="attending">Zusage?</option>
+                    <option value="vegetarian">Vegetarisch?</option>
+                    <option value="custom">+1?</option>
+                </select>
             </h1>
+            <ul>
+                <li>{{ groups.length }} Gruppen</li>
+                <li>{{ guests.length }} Gäste</li>
+                <li>{{ guests.email }} E-Mail-Adressen</li>
+                <li>{{ guests.filter(guest => guest.attending).length }} Zusagen</li>
+                <li>{{ guests.filter(guest => guest.vegetarian).length }} vegetarische Hauptspeisen</li>
+                <li>{{ guests.filter(guest => guest.custom).length }} +1s</li>
+            </ul>
             <table>
                 <tr>
                     <th>ID</th>
@@ -31,7 +47,7 @@
                     <th>Gruppe darf +1 hinzufügen</th>
                     <th>Anmerkungen</th>
                 </tr>
-                <tr v-for="guest in guests">
+                <tr v-for="guest in sortedGuests">
                     <td v-for="value in guest">
                         <template v-if="typeof value === 'boolean'">
                             <template v-if="value">✔</template>
@@ -51,6 +67,7 @@
                 password: '',
                 groups: null,
                 isLoading: false,
+                order: 'group'
             };
         },
         computed: {
@@ -77,6 +94,17 @@
                     return accumulator;
                 }, []);
             },
+            sortedGuests() {
+                return this.guests.sort((a, b) => {
+                    let left = a[this.order];
+                    let right = b[this.order];
+                    if (typeof left === 'boolean') left = !left;
+                    if (typeof right === 'boolean') right = !right;
+                    if (left < right) return -1;
+                    if (left > right) return 1;
+                    return 0;
+                });
+            }
         },
         methods: {
             async fetch() {
