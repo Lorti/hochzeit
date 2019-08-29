@@ -22,6 +22,7 @@ exports.handler = function (event, context, callback) {
         Storyblok
             .get('cdn/stories', {
                 'starts_with': 'groups',
+                'per_page': 50,
             })
             .then((response) => {
                 const groups = response.data.stories;

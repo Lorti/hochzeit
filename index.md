@@ -1,3 +1,2 @@
-# Teresa & Manuel
-
+<Hero />
 <Group />

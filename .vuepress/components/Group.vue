@@ -1,7 +1,7 @@
 <template>
     <form autocomplete="off">
         <section class="code" v-if="!group">
-            <p>Willkommen auf unserer Hochzeits-Website!</p>
+            <h1>Willkommen auf unserer Hochzeits-Website!</h1>
             <p>Auf unserer Einladung steht ein Code, den du im unten stehenden Feld eingeben kannst, um dich anzumelden.</p>
             <input
                 class="code__input"
@@ -10,23 +10,21 @@
                 @input="password = $event.target.value.toUpperCase()"
                 autofocus
             >
-            <button
-                @click.prevent="login"
-                :disabled="isLoading"
-            >
-                Anmelden
-            </button>
+            <p>
+                <button
+                    @click.prevent="login"
+                    :disabled="isLoading"
+                >
+                    Anmelden
+                </button>
+            </p>
         </section>
 
         <section v-else>
-            Hallo {{ group.name }}!
+            <h1>Hallo {{ group.name }}!</h1>
             <input type="hidden" v-model="password">
             <input type="hidden" v-model="group.id">
-            <label>
-                <span>E-Mail</span>
-                <input type="email" v-model="group.email" autocomplete="email" autocapitalize="none">
-            </label>
-            <template v-for="guest in group.guests">
+            <fieldset v-for="guest in group.guests">
                 <label v-if="guest.custom">
                     <span>Name der Begleitung</span>
                     <input type="email" v-model="guest.name">
@@ -42,17 +40,23 @@
                     Ich möchte eine vegetarische Hauptspeise
                     <small>(restliche Gänge sind ohnehin vegetarisch)</small>
                 </label>
-            </template>
+            </fieldset>
             <button
                 v-if="showPlusOneButton"
                 @click.prevent="addPlusOneGuest"
             >
                 Ich möchte eine Begleitung mitnehmen …
             </button>
-            <label>
-                <span>Anmerkungen</span>
-                <textarea v-model="group.message" rows="5" cols="20"></textarea>
-            </label>
+            <fieldset>
+                <label>
+                    <span>E-Mail</span>
+                    <input type="email" v-model="group.email" autocomplete="email" autocapitalize="none">
+                </label>
+                <label>
+                    <span>Anmerkungen</span>
+                    <textarea v-model="group.message" rows="5" cols="20"></textarea>
+                </label>
+            </fieldset>
             <button
                 @click.prevent="update"
                 :disabled="isLoading"
@@ -116,6 +120,8 @@
     @import "../theme/config";
 
     section {
+        margin: 2.5rem auto 5rem;
+        max-width: 30rem;
         text-align: center;
     }
 
@@ -125,6 +131,17 @@
         span {
             display: block;
         }
+    }
+
+    fieldset {
+        border: none;
+        text-align: left;
+    }
+
+    [type="text"],
+    [type="email"],
+    textarea {
+        width: 100%;
     }
 
     .code {
