@@ -32,21 +32,29 @@
                 <template v-else>
                     {{ guest.name }}
                 </template>
-                <label>
-                    <input type="checkbox" v-model="guest.attending"> Ja, ich komme gerne zu eurer Hochzeit
+                <label class="checkbox">
+                    <input class="checkbox__input" type="checkbox" v-model="guest.attending">
+                    <span class="checkbox__icon checkbox__icon--checkmark"></span>
+                    <span class="checkbox__label">
+                        Ja, ich komme gerne zu eurer Hochzeit
+                    </span>
                 </label>
-                <label>
-                    <input type="checkbox" v-model="guest.vegetarian">
-                    Ich möchte eine vegetarische Hauptspeise
-                    <small>(restliche Gänge sind ohnehin vegetarisch)</small>
+                <label class="checkbox">
+                    <input class="checkbox__input" type="checkbox" v-model="guest.vegetarian">
+                    <span class="checkbox__icon checkbox__icon--checkmark"></span>
+                    <span class="checkbox__label">
+                        Ich möchte eine vegetarische Hauptspeise<br>
+                        <small>(restliche Gänge sind ohnehin vegetarisch)</small>
+                    </span>
                 </label>
             </fieldset>
-            <button
-                v-if="showPlusOneButton"
-                @click.prevent="addPlusOneGuest"
-            >
-                Ich möchte eine Begleitung mitnehmen …
-            </button>
+            <label class="checkbox" v-if="showPlusOneButton">
+                <input class="checkbox__input" type="checkbox" @change="addPlusOneGuest">
+                <span class="checkbox__icon checkbox__icon--plus">+</span>
+                <span class="checkbox__label">
+                    Ich möchte eine Begleitung mitnehmen.
+                </span>
+            </label>
             <fieldset>
                 <label>
                     <span>E-Mail</span>
@@ -119,10 +127,34 @@
 <style lang="scss" scoped>
     @import "../theme/config";
 
+    @mixin focusStyle() {
+        outline: 3px solid $hover-color;
+        border-radius: 0;
+    }
+
     section {
         margin: 2.5rem auto 5rem;
         max-width: 30rem;
         text-align: center;
+    }
+
+    button {
+        border: none;
+        padding: .5rem 1rem;
+        font-size: inherit;
+        color: #fff;
+        background: $main-color;
+        border-radius: 3px;
+        transition: background .25s;
+
+        &:hover {
+            background: $hover-color;
+            cursor: pointer;
+        }
+
+        &:disabled {
+            opacity: .5;
+        }
     }
 
     label {
@@ -134,7 +166,9 @@
     }
 
     fieldset {
-        border: none;
+        margin: 0;
+        border: 0;
+        padding: 0;
         text-align: left;
     }
 
@@ -142,6 +176,18 @@
     [type="email"],
     textarea {
         width: 100%;
+        margin: 0.5rem 0 1rem;
+        padding: 0.5rem;
+        font-size: inherit;
+        font-family: inherit;
+        border: 1px solid $main-color;
+        border-radius: 3px;
+    }
+
+    button:focus,
+    input:focus,
+    textarea:focus {
+        @include focusStyle;
     }
 
     .code {
@@ -154,7 +200,8 @@
         display: block;
         margin-bottom: 1rem;
         border: none;
-        border-bottom: 2px solid black;
+        border-bottom: 2px dotted black;
+        border-radius: 0;
         width: 100%;
         font-size: 2rem;
         font-family: monospace;
@@ -165,5 +212,50 @@
             border-color: $main-color;
             color: $main-color;
         }
+    }
+
+    .checkbox {
+        margin: 1rem 0;
+
+        &::after {
+            content: '';
+            clear: both;
+        }
+    }
+
+    .checkbox__input {
+        opacity: 0;
+    }
+
+    .checkbox__icon {
+        float: left;
+        width: 1.2em;
+        height: 1.2em;
+        color: #fff;
+        background: $main-color;
+        border-radius: 3px;
+
+        &--checkmark::after {
+            position: absolute;
+            margin: 0.25em;
+            height: 0.25em;
+            width: 0.5em;
+            border-left: 3px solid #fff;
+            border-bottom: 3px solid #fff;
+            transform: rotate(-45deg);
+        }
+    }
+
+    .checkbox__input:checked ~ .checkbox__icon::after {
+        content: '';
+    }
+
+    .checkbox__input:focus ~ .checkbox__icon {
+        @include focusStyle;
+    }
+
+    .checkbox__label {
+        float: left;
+        margin-left: 0.5em;
     }
 </style>

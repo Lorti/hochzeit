@@ -5,6 +5,10 @@
 <style lang="scss">
     @import "./config";
 
+    * {
+        box-sizing: border-box;
+    }
+
     html {
         font-family: 'Lato', sans-serif;
         cursor: default;
@@ -18,22 +22,13 @@
         font-family: 'Abril Fatface', cursive;
     }
 
-    button {
-        border: none;
-        padding: .5rem 1rem;
-        font-size: inherit;
-        color: #fff;
-        background: $main-color;
-        border-radius: 3px;
-        transition: background .25s;
+    a {
+        color: $main-color;
+        text-decoration: none;
 
         &:hover {
-            background: $hover-color;
-            cursor: pointer;
-        }
-
-        &:disabled {
-            opacity: .5;
+            color: $hover-color;
+            text-decoration: underline;
         }
     }
 

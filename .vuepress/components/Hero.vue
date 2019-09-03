@@ -16,7 +16,7 @@
         align-items: flex-start;
         justify-content: flex-end;
         padding: 3rem;
-        background: url(../images/header.jpg) center 30%;
+        background: url(../images/header-tileable.jpg) center 30%;
         background-size: auto 135%;
 
         --circle-size: 24rem;
