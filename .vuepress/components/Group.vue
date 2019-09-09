@@ -22,6 +22,7 @@
 
         <section v-else>
             <h1>Hallo {{ group.name }}!</h1>
+            <Schedule/>
             <input type="hidden" v-model="password">
             <input type="hidden" v-model="group.id">
             <fieldset v-for="guest in group.guests">
@@ -76,7 +77,12 @@
 </template>
 
 <script>
+    import Schedule from './Schedule';
+
     export default {
+        components: {
+            Schedule,
+        },
         data() {
             return {
                 password: '',
