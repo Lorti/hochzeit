@@ -15,7 +15,7 @@
         display: flex;
         align-items: flex-start;
         justify-content: flex-end;
-        padding: 3rem;
+        padding: 3rem 9rem;
         background: url(../images/header-tileable.jpg) center 30%;
         background-size: auto 135%;
 

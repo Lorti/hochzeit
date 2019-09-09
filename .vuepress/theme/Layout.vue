@@ -40,4 +40,10 @@
         color: #fff;
         background: $main-color;
     }
+
+    @media (min-width: 1280px) {
+        html {
+            font-size: 112.5%;
+        }
+    }
 </style>
