@@ -21,57 +21,157 @@
         </section>
 
         <section v-else>
-            <h1>Hallo {{ group.name }}!</h1>
-            <Schedule/>
-            <input type="hidden" v-model="password">
-            <input type="hidden" v-model="group.id">
-            <fieldset v-for="guest in group.guests">
-                <label v-if="guest.custom">
-                    <span>Name der Begleitung</span>
-                    <input type="email" v-model="guest.name">
-                </label>
-                <template v-else>
-                    {{ guest.name }}
-                </template>
-                <label class="checkbox">
-                    <input class="checkbox__input" type="checkbox" v-model="guest.attending">
-                    <span class="checkbox__icon checkbox__icon--checkmark"></span>
+            <div>
+                <h1>Hallo {{ group.name }}!</h1>
+                <p>
+                    Wir heiraten, und das wollen wir mit euch feiern!<br>
+                    Unsere Hochzeit findet am 30. Mai 2020 beim Oberhauser statt.
+                </p>
+                <p>Hier findet ihr alle nötigen Infos. Bei weiteren Fragen, könnt ihr euch gerne an uns wenden!</p>
+                <p>Wir freuen uns auf euch!</p>
+            </div>
+
+            <img class="leaf" src="../images/zweig.png">
+
+            <div>
+                <p>Bitte gebt uns bis 1. Februar Bescheid, ob ihr zu unserer Hochzeit kommen könnt.</p>
+
+                <fieldset v-for="guest in group.guests">
+                    <template v-if="guest.custom">
+                        <h2>Begleitung</h2>
+                        <label>
+                            <span>Name der Begleitung</span>
+                            <input type="email" v-model="guest.name">
+                        </label>
+                    </template>
+                    <template v-else>
+                        <h2>{{ guest.name }}</h2>
+                    </template>
+                    <label class="checkbox">
+                        <input class="checkbox__input" type="checkbox" v-model="guest.attending">
+                        <span class="checkbox__icon checkbox__icon--checkmark"></span>
+                        <span class="checkbox__label">
+                            Ja, ich komme gerne zu eurer Hochzeit
+                        </span>
+                    </label>
+                    <label class="checkbox">
+                        <input class="checkbox__input" type="checkbox" v-model="guest.vegetarian">
+                        <span class="checkbox__icon checkbox__icon--checkmark"></span>
+                        <span class="checkbox__label">
+                            Ich möchte eine vegetarische Hauptspeise<br>
+                            <small>(restliche Gänge sind ohnehin vegetarisch)</small>
+                        </span>
+                    </label>
+                </fieldset>
+
+                <label class="checkbox" v-if="showPlusOneButton">
+                    <input class="checkbox__input" type="checkbox" @change="addPlusOneGuest">
+                    <span class="checkbox__icon checkbox__icon--plus">+</span>
                     <span class="checkbox__label">
-                        Ja, ich komme gerne zu eurer Hochzeit
+                        Ich möchte eine Begleitung mitnehmen
                     </span>
                 </label>
-                <label class="checkbox">
-                    <input class="checkbox__input" type="checkbox" v-model="guest.vegetarian">
-                    <span class="checkbox__icon checkbox__icon--checkmark"></span>
-                    <span class="checkbox__label">
-                        Ich möchte eine vegetarische Hauptspeise<br>
-                        <small>(restliche Gänge sind ohnehin vegetarisch)</small>
-                    </span>
-                </label>
-            </fieldset>
-            <label class="checkbox" v-if="showPlusOneButton">
-                <input class="checkbox__input" type="checkbox" @change="addPlusOneGuest">
-                <span class="checkbox__icon checkbox__icon--plus">+</span>
-                <span class="checkbox__label">
-                    Ich möchte eine Begleitung mitnehmen.
-                </span>
-            </label>
-            <fieldset>
-                <label>
-                    <span>E-Mail</span>
-                    <input type="email" v-model="group.email" autocomplete="email" autocapitalize="none">
-                </label>
-                <label>
-                    <span>Anmerkungen</span>
-                    <textarea v-model="group.message" rows="5" cols="20"></textarea>
-                </label>
-            </fieldset>
-            <button
-                @click.prevent="update"
-                :disabled="isLoading"
-            >
-                Änderungen speichern
-            </button>
+
+                <fieldset>
+                    <label>
+                        <span v-if="group.guests.length > 1">Eure E-Mail-Adresse (für Fotos und Updates)</span>
+                        <span v-else>Deine E-Mail-Adresse (für Fotos und Updates)</span>
+                        <input type="email" v-model="group.email" autocomplete="email" autocapitalize="none">
+                    </label>
+                    <label>
+                        <span v-if="group.guests.length > 1">Möchtet ihr uns noch etwas mitteilen?</span>
+                        <span v-else>Möchtest du uns noch etwas mitteilen?</span>
+                        <textarea v-model="group.message" rows="5" cols="20"></textarea>
+                    </label>
+                </fieldset>
+
+                <input type="hidden" v-model="password">
+                <input type="hidden" v-model="group.id">
+
+                <button
+                    @click.prevent="update"
+                    :disabled="isLoading"
+                >
+                    Änderungen speichern
+                </button>
+            </div>
+
+            <img class="leaf" src="../images/zweig.png">
+
+            <div>
+                <h2>Ablauf</h2>
+                <p>Unser gesamtes Fest findet am Oberhauser-Hof statt.</p>
+                <p>Um 15:00 Uhr beginnt unsere Trauung.</p>
+                <Schedule/>
+                <img src="../images/image.jpg">
+                <p>Wir bitten euch während der Zeremonie <strong>nicht</strong> zu fotografieren.</p>
+                <p>
+                    Wir haben eine wunderbare Fotografin, die den Tag für uns festhält.<br>
+                    Keine Sorge, ihr bekommt nach der Hochzeit alle Fotos per E-Mail zugeschickt.
+                </p>
+            </div>
+
+            <img class="leaf" src="../images/zweig.png">
+
+            <div>
+                <h2>Anreise</h2>
+                <p>
+                    Der Oberhauser<br>
+                    Kranzing 14,<br>
+                    4615 Holzhausen
+                </p>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2656.865460112851!2d14.088598615652886!3d48.24771727923232!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477392069fe507a1%3A0x6734220a0c9bc331!2sDer%20Oberhauser%20Barbara%20Zehetner!5e0!3m2!1sde!2sat!4v1568143650824!5m2!1sde!2sat" width="600" height="450"></iframe>
+                <p>Damit ihr mit uns die Nacht durchfeiern könnt und keiner Taxi-Dienst spielen muss, organisieren wir für euch einen Shuttle-Service.</p>
+                <p>Dieser bringt euch am Nachmittag rechtzeitig zur Trauung und in der Nacht stündlich wieder zurück nach Linz.</p>
+                <p>Details dazu folgen noch.</p>
+            </div>
+
+            <img class="leaf" src="../images/zweig.png">
+
+            <div>
+                <h2>Geschenke & Spiele</h2>
+                <p>
+                    Am meisten würden wir uns über eine finanziellen Beitrag für unsere Feier freuen.
+                    Das muss kein Cellophan-Ungetüm oder Geld in einem Betonblock sein – ein nettes Kuvert reicht uns völlig.
+                </p>
+                <p>Für Fragen und Ideen zur Feier und zu Spielen kontakiert bitte Julia Fellner unter</p>
+            </div>
+
+            <img class="leaf" src="../images/zweig.png">
+
+            <div>
+                <h2>Unterkünfte</h2>
+                <p>Für unsere Gäste, die nicht aus Linz kommen, empfehlen wir folgende Hotels.</p>
+                <p>Wir selbst werden die Nacht im Hotel am Domplatz verbringen.</p>
+                <ul class="hotels">
+                    <li class="hotels__hotel">
+                        Hotel am Domplatz<br>
+                        Stifterstraße 4<br>
+                        <a href="tel:+43 732 773 000">+43 732 773000</a><br>
+                        <a href="https://www.hotelamdomplatz.at/">www.hotelamdomplatz.at</a>
+                    </li>
+                    <li class="hotels__hotel">
+                        Park Inn<br>
+                        Hessenplatz 18<br>
+                        <a href="tel:+43 732 777 100">+43 732 777 100</a><br>
+                        <a href="https://www.radissonhotels.com/de-de/hotels/park-inn-linz">www.radissonhotels.com</a>
+                    </li>
+                    <li class="hotels__hotel">
+                        Hotel Schillerpark<br>
+                        Rainerstraße 2-4<br>
+                        <a href="tel:+43 732 69 50 102">+43 732 69 50-102</a><br>
+                        <a href="https://www.austria-trend.at/de/hotels/schillerpark">www.austria-trend.at</a>
+                    </li>
+                    <li class="hotels__hotel">
+                        Ibis Linz City<br>
+                        Kärntner Strasse 18-20<br>
+                        <a href="tel:+43 732 69401">+43 732 69401</a><br>
+                        <a href="https://www.accorhotels.com/de/hotel-1722-ibis-linz-city/index.shtml">www.accorhotels.com</a>
+                    </li>
+                </ul>
+            </div>
+
+            <img src="../images/blumen-2.png">
         </section>
     </form>
 </template>
@@ -220,6 +320,11 @@
         }
     }
 
+    .leaf {
+        display: block;
+        margin: 1rem auto;
+    }
+
     .checkbox {
         margin: 1rem 0;
 
@@ -263,5 +368,17 @@
     .checkbox__label {
         float: left;
         margin-left: 0.5em;
+    }
+
+    .hotels {
+        display: flex;
+        flex-wrap: wrap;
+        padding-left: 0;
+        list-style: none;
+    }
+
+    .hotels__hotel {
+        width: 50%;
+        margin-bottom: 1rem;
     }
 </style>
