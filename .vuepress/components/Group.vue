@@ -1,10 +1,10 @@
 <template>
     <form autocomplete="off">
-        <section class="code" v-if="!group">
+        <section class="wrap wrap--entry" v-if="!group">
             <h1>Willkommen auf unserer Hochzeits-Website!</h1>
             <p>Auf unserer Einladung steht ein Code, den du im unten stehenden Feld eingeben kannst, um dich anzumelden.</p>
             <input
-                class="code__input"
+                class="code"
                 type="text"
                 :value="password.toUpperCase()"
                 @input="password = $event.target.value.toUpperCase()"
@@ -21,7 +21,7 @@
         </section>
 
         <section v-else>
-            <div>
+            <div class="wrap">
                 <h1>Hallo {{ group.name }}!</h1>
                 <p>
                     Wir heiraten, und das wollen wir mit euch feiern!<br>
@@ -33,10 +33,10 @@
 
             <img class="leaf" src="../images/zweig.png">
 
-            <div>
+            <div class="wrap">
                 <p>Bitte gebt uns bis 1. Februar Bescheid, ob ihr zu unserer Hochzeit kommen könnt.</p>
 
-                <fieldset v-for="guest in group.guests">
+                <div v-for="guest in group.guests">
                     <template v-if="guest.custom">
                         <h2>Begleitung</h2>
                         <label>
@@ -62,7 +62,7 @@
                             <small>(restliche Gänge sind ohnehin vegetarisch)</small>
                         </span>
                     </label>
-                </fieldset>
+                </div>
 
                 <label class="checkbox" v-if="showPlusOneButton">
                     <input class="checkbox__input" type="checkbox" @change="addPlusOneGuest">
@@ -72,7 +72,7 @@
                     </span>
                 </label>
 
-                <fieldset>
+                <div>
                     <label>
                         <span v-if="group.guests.length > 1">Eure E-Mail-Adresse (für Fotos und Updates)</span>
                         <span v-else>Deine E-Mail-Adresse (für Fotos und Updates)</span>
@@ -83,7 +83,7 @@
                         <span v-else>Möchtest du uns noch etwas mitteilen?</span>
                         <textarea v-model="group.message" rows="5" cols="20"></textarea>
                     </label>
-                </fieldset>
+                </div>
 
                 <input type="hidden" v-model="password">
                 <input type="hidden" v-model="group.id">
@@ -99,47 +99,57 @@
             <img class="leaf" src="../images/zweig.png">
 
             <div>
-                <h2>Ablauf</h2>
-                <p>Unser gesamtes Fest findet am Oberhauser-Hof statt.</p>
-                <p>Um 15:00 Uhr beginnt unsere Trauung.</p>
-                <Schedule/>
+                <div class="wrap">
+                    <h2>Ablauf</h2>
+                    <p>Unser gesamtes Fest findet am Oberhauser-Hof statt.</p>
+                    <p>Um 15:00 Uhr beginnt unsere Trauung.</p>
+                    <Schedule/>
+                </div>
                 <img src="../images/image.jpg">
-                <p>Wir bitten euch während der Zeremonie <strong>nicht</strong> zu fotografieren.</p>
-                <p>
-                    Wir haben eine wunderbare Fotografin, die den Tag für uns festhält.<br>
-                    Keine Sorge, ihr bekommt nach der Hochzeit alle Fotos per E-Mail zugeschickt.
-                </p>
+                <div class="wrap">
+                    <p>Wir bitten euch während der Zeremonie <strong>nicht</strong> zu fotografieren.</p>
+                    <p>
+                        Wir haben eine wunderbare Fotografin, die den Tag für uns festhält.<br>
+                        Keine Sorge, ihr bekommt nach der Hochzeit alle Fotos per E-Mail zugeschickt.
+                    </p>
+                </div>
             </div>
 
             <img class="leaf" src="../images/zweig.png">
 
             <div>
-                <h2>Anreise</h2>
-                <p>
-                    Der Oberhauser<br>
-                    Kranzing 14,<br>
-                    4615 Holzhausen
-                </p>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2656.865460112851!2d14.088598615652886!3d48.24771727923232!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477392069fe507a1%3A0x6734220a0c9bc331!2sDer%20Oberhauser%20Barbara%20Zehetner!5e0!3m2!1sde!2sat!4v1568143650824!5m2!1sde!2sat" width="600" height="450"></iframe>
-                <p>Damit ihr mit uns die Nacht durchfeiern könnt und keiner Taxi-Dienst spielen muss, organisieren wir für euch einen Shuttle-Service.</p>
-                <p>Dieser bringt euch am Nachmittag rechtzeitig zur Trauung und in der Nacht stündlich wieder zurück nach Linz.</p>
-                <p>Details dazu folgen noch.</p>
+                <div class="wrap">
+                    <h2>Anreise</h2>
+                    <p>
+                        Der Oberhauser<br>
+                        Kranzing 14<br>
+                        4615 Holzhausen
+                    </p>
+                </div>
+                <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2656.865460112851!2d14.088598615652886!3d48.24771727923232!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477392069fe507a1%3A0x6734220a0c9bc331!2sDer%20Oberhauser%20Barbara%20Zehetner!5e0!3m2!1sde!2sat!4v1568143650824!5m2!1sde!2sat" width="600" height="450"></iframe>
+                <div class="wrap">
+                    <p>Damit ihr mit uns die Nacht durchfeiern könnt und keiner Taxi-Dienst spielen muss, organisieren
+                        wir für euch einen Shuttle-Service.</p>
+                    <p>Dieser bringt euch am Nachmittag rechtzeitig zur Trauung und in der Nacht stündlich wieder zurück
+                        nach Linz.</p>
+                    <p>Details dazu folgen noch.</p>
+                </div>
             </div>
 
             <img class="leaf" src="../images/zweig.png">
 
-            <div>
+            <div class="wrap">
                 <h2>Geschenke & Spiele</h2>
                 <p>
                     Am meisten würden wir uns über eine finanziellen Beitrag für unsere Feier freuen.
                     Das muss kein Cellophan-Ungetüm oder Geld in einem Betonblock sein – ein nettes Kuvert reicht uns völlig.
                 </p>
-                <p>Für Fragen und Ideen zur Feier und zu Spielen kontakiert bitte Julia Fellner unter</p>
+                <p>Für Fragen und Ideen zur Feier und zu Spielen kontaktiert bitte Julia Fellner unter <a href="tel:+43 681 20592812">+43 681 20592812</a> oder <a href="mailto:julia.fellner@gmail.com">julia.fellner@gmail.com</a>.</p>
             </div>
 
             <img class="leaf" src="../images/zweig.png">
 
-            <div>
+            <div class="wrap">
                 <h2>Unterkünfte</h2>
                 <p>Für unsere Gäste, die nicht aus Linz kommen, empfehlen wir folgende Hotels.</p>
                 <p>Wir selbst werden die Nacht im Hotel am Domplatz verbringen.</p>
@@ -240,8 +250,24 @@
 
     section {
         margin: 2.5rem auto 5rem;
-        max-width: 30rem;
         text-align: center;
+    }
+
+    .wrap {
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        max-width: 30rem;
+
+        &--entry {
+            max-width: 20rem;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
     }
 
     button {
@@ -271,13 +297,6 @@
         }
     }
 
-    fieldset {
-        margin: 0;
-        border: 0;
-        padding: 0;
-        text-align: left;
-    }
-
     [type="text"],
     [type="email"],
     textarea {
@@ -297,12 +316,6 @@
     }
 
     .code {
-        margin-left: auto;
-        margin-right: auto;
-        max-width: 20rem;
-    }
-
-    .code__input {
         display: block;
         margin-bottom: 1rem;
         border: none;
@@ -335,6 +348,7 @@
     }
 
     .checkbox__input {
+        position: absolute;
         opacity: 0;
     }
 
@@ -366,8 +380,8 @@
     }
 
     .checkbox__label {
-        float: left;
-        margin-left: 0.5em;
+        margin-left: 1.2em + 0.5em;
+        text-align: left;
     }
 
     .hotels {
@@ -380,5 +394,10 @@
     .hotels__hotel {
         width: 50%;
         margin-bottom: 1rem;
+    }
+
+    .map {
+        border: 0;
+        width: 100%;
     }
 </style>
