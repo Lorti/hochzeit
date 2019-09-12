@@ -144,7 +144,7 @@
                     Am meisten würden wir uns über eine finanziellen Beitrag für unsere Feier freuen.
                     Das muss kein Cellophan-Ungetüm oder Geld in einem Betonblock sein – ein nettes Kuvert reicht uns völlig.
                 </p>
-                <p>Für Fragen und Ideen zur Feier und zu Spielen kontaktiert bitte Julia Fellner unter <a href="tel:+43 681 20592812">+43 681 20592812</a> oder <a href="mailto:julia.fellner@gmail.com">julia.fellner@gmail.com</a>.</p>
+                <p>Für Fragen und Ideen zur Feier und zu Spielen kontaktiert bitte Julia Fellner unter <a href="tel:+43 681 20592812">+43 681 20592812</a> oder <a href="mailto:julia.fellner@gmx.at">julia.fellner@gmx.at</a>.</p>
             </div>
 
             <img class="leaf" src="../images/zweig.png">
