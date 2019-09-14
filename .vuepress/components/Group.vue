@@ -118,7 +118,7 @@
                     <div class="photographs__text">
                         <p>Wir bitten euch während der Zeremonie <strong>nicht</strong> zu fotografieren.</p>
                         <p>
-                            Wir haben eine wunderbare Fotografin, die den Tag für uns festhält.<br>
+                            Wir haben eine wunderbare Fotografin, die den Tag für uns festhält.
                             Keine Sorge, ihr bekommt nach der Hochzeit alle Fotos per E-Mail zugeschickt.
                         </p>
                     </div>
@@ -280,6 +280,11 @@
         text-align: center;
     }
 
+    h1, h2 {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+
     .wrap {
         margin-left: auto;
         margin-right: auto;
@@ -363,7 +368,7 @@
 
     .leaf {
         display: block;
-        margin: 1rem auto;
+        margin: 2.5rem auto;
     }
 
     .checkbox {
@@ -435,6 +440,7 @@
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
+        margin: 2.5rem auto;
     }
 
     .photographs__image {
@@ -448,12 +454,15 @@
     }
 
     .location {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
         margin-left: auto;
         margin-right: auto;
         max-width: 75rem;
+
+        @media (min-width: 50rem) {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
     }
 
     .location__flowers {
