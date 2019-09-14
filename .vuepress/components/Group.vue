@@ -33,67 +33,73 @@
 
             <img class="leaf" src="../images/zweig.png">
 
-            <div class="wrap">
-                <p>Bitte gebt uns bis 1. Februar Bescheid, ob ihr zu unserer Hochzeit kommen könnt.</p>
+            <div>
+                <div class="wrap">
+                    <p>Bitte gebt uns bis 1. Februar Bescheid, ob ihr zu unserer Hochzeit kommen könnt.</p>
+                </div>
 
-                <div v-for="guest in group.guests">
-                    <template v-if="guest.custom">
-                        <h2>Begleitung</h2>
-                        <label>
-                            <span>Name der Begleitung</span>
-                            <input type="email" v-model="guest.name">
+                <div class="guests">
+                    <div class="guests__guest" v-for="guest in group.guests">
+                        <template v-if="guest.custom">
+                            <h2>Begleitung</h2>
+                            <label>
+                                <span>Name der Begleitung</span>
+                                <input type="email" v-model="guest.name">
+                            </label>
+                        </template>
+                        <template v-else>
+                            <h2>{{ guest.name }}</h2>
+                        </template>
+                        <label class="checkbox">
+                            <input class="checkbox__input" type="checkbox" v-model="guest.attending">
+                            <span class="checkbox__icon checkbox__icon--checkmark"></span>
+                            <span class="checkbox__label">
+                                Ja, ich komme gerne zu eurer Hochzeit
+                            </span>
                         </label>
-                    </template>
-                    <template v-else>
-                        <h2>{{ guest.name }}</h2>
-                    </template>
-                    <label class="checkbox">
-                        <input class="checkbox__input" type="checkbox" v-model="guest.attending">
-                        <span class="checkbox__icon checkbox__icon--checkmark"></span>
-                        <span class="checkbox__label">
-                            Ja, ich komme gerne zu eurer Hochzeit
-                        </span>
-                    </label>
-                    <label class="checkbox">
-                        <input class="checkbox__input" type="checkbox" v-model="guest.vegetarian">
-                        <span class="checkbox__icon checkbox__icon--checkmark"></span>
-                        <span class="checkbox__label">
-                            Ich möchte eine vegetarische Hauptspeise<br>
-                            <small>(restliche Gänge sind ohnehin vegetarisch)</small>
-                        </span>
-                    </label>
+                        <label class="checkbox">
+                            <input class="checkbox__input" type="checkbox" v-model="guest.vegetarian">
+                            <span class="checkbox__icon checkbox__icon--checkmark"></span>
+                            <span class="checkbox__label">
+                                Ich möchte eine vegetarische Hauptspeise<br>
+                                <small>(restliche Gänge sind ohnehin vegetarisch)</small>
+                            </span>
+                        </label>
+                    </div>
                 </div>
 
-                <label class="checkbox" v-if="showPlusOneButton">
-                    <input class="checkbox__input" type="checkbox" @change="addPlusOneGuest">
-                    <span class="checkbox__icon checkbox__icon--plus">+</span>
-                    <span class="checkbox__label">
-                        Ich möchte eine Begleitung mitnehmen
-                    </span>
-                </label>
+                <div class="wrap">
+                    <label class="checkbox" v-if="showPlusOneButton">
+                        <input class="checkbox__input" type="checkbox" @change="addPlusOneGuest">
+                        <span class="checkbox__icon checkbox__icon--plus">+</span>
+                        <span class="checkbox__label">
+                            Ich möchte eine Begleitung mitnehmen
+                        </span>
+                    </label>
 
-                <div>
-                    <label>
-                        <span v-if="group.guests.length > 1">Eure E-Mail-Adresse (für Fotos und Updates)</span>
-                        <span v-else>Deine E-Mail-Adresse (für Fotos und Updates)</span>
-                        <input type="email" v-model="group.email" autocomplete="email" autocapitalize="none">
-                    </label>
-                    <label>
-                        <span v-if="group.guests.length > 1">Möchtet ihr uns noch etwas mitteilen?</span>
-                        <span v-else>Möchtest du uns noch etwas mitteilen?</span>
-                        <textarea v-model="group.message" rows="5" cols="20"></textarea>
-                    </label>
+                    <div>
+                        <label>
+                            <span v-if="group.guests.length > 1">Eure E-Mail-Adresse (für Fotos und Updates)</span>
+                            <span v-else>Deine E-Mail-Adresse (für Fotos und Updates)</span>
+                            <input type="email" v-model="group.email" autocomplete="email" autocapitalize="none">
+                        </label>
+                        <label>
+                            <span v-if="group.guests.length > 1">Möchtet ihr uns noch etwas mitteilen?</span>
+                            <span v-else>Möchtest du uns noch etwas mitteilen?</span>
+                            <textarea v-model="group.message" rows="5" cols="20"></textarea>
+                        </label>
+                    </div>
+
+                    <input type="hidden" v-model="password">
+                    <input type="hidden" v-model="group.id">
+
+                    <button
+                        @click.prevent="update"
+                        :disabled="isLoading"
+                    >
+                        Änderungen speichern
+                    </button>
                 </div>
-
-                <input type="hidden" v-model="password">
-                <input type="hidden" v-model="group.id">
-
-                <button
-                    @click.prevent="update"
-                    :disabled="isLoading"
-                >
-                    Änderungen speichern
-                </button>
             </div>
 
             <img class="leaf" src="../images/zweig.png">
@@ -105,33 +111,44 @@
                     <p>Um 15:00 Uhr beginnt unsere Trauung.</p>
                     <Schedule/>
                 </div>
-                <img src="../images/image.jpg">
-                <div class="wrap">
-                    <p>Wir bitten euch während der Zeremonie <strong>nicht</strong> zu fotografieren.</p>
-                    <p>
-                        Wir haben eine wunderbare Fotografin, die den Tag für uns festhält.<br>
-                        Keine Sorge, ihr bekommt nach der Hochzeit alle Fotos per E-Mail zugeschickt.
-                    </p>
+                <div class="photographs">
+                    <div class="photographs__image">
+                        <img src="../images/image.jpg">
+                    </div>
+                    <div class="photographs__text">
+                        <p>Wir bitten euch während der Zeremonie <strong>nicht</strong> zu fotografieren.</p>
+                        <p>
+                            Wir haben eine wunderbare Fotografin, die den Tag für uns festhält.<br>
+                            Keine Sorge, ihr bekommt nach der Hochzeit alle Fotos per E-Mail zugeschickt.
+                        </p>
+                    </div>
                 </div>
             </div>
 
             <img class="leaf" src="../images/zweig.png">
 
             <div>
-                <div class="wrap">
-                    <h2>Anreise</h2>
-                    <p>
+                <h2>Anreise</h2>
+                <div class="location">
+                    <div class="location__flowers">
+                        <img src="../images/blumen-1.png">
+                    </div>
+                    <p class="location__address">
                         Der Oberhauser<br>
                         Kranzing 14<br>
                         4615 Holzhausen
                     </p>
+                    <iframe class="location__map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2656.865460112851!2d14.088598615652886!3d48.24771727923232!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477392069fe507a1%3A0x6734220a0c9bc331!2sDer%20Oberhauser%20Barbara%20Zehetner!5e0!3m2!1sde!2sat!4v1568143650824!5m2!1sde!2sat" width="640" height="480"></iframe>
                 </div>
-                <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2656.865460112851!2d14.088598615652886!3d48.24771727923232!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477392069fe507a1%3A0x6734220a0c9bc331!2sDer%20Oberhauser%20Barbara%20Zehetner!5e0!3m2!1sde!2sat!4v1568143650824!5m2!1sde!2sat" width="600" height="450"></iframe>
                 <div class="wrap">
-                    <p>Damit ihr mit uns die Nacht durchfeiern könnt und keiner Taxi-Dienst spielen muss, organisieren
-                        wir für euch einen Shuttle-Service.</p>
-                    <p>Dieser bringt euch am Nachmittag rechtzeitig zur Trauung und in der Nacht stündlich wieder zurück
-                        nach Linz.</p>
+                    <p>
+                        Damit ihr mit uns die Nacht durchfeiern könnt und keiner Taxi-Dienst spielen muss,
+                        organisieren wir für euch einen Shuttle-Service.
+                    </p>
+                    <p>
+                        Dieser bringt euch am Nachmittag rechtzeitig zur Trauung
+                        und in der Nacht stündlich wieder zurück nach Linz.
+                    </p>
                     <p>Details dazu folgen noch.</p>
                 </div>
             </div>
@@ -144,7 +161,11 @@
                     Am meisten würden wir uns über eine finanziellen Beitrag für unsere Feier freuen.
                     Das muss kein Cellophan-Ungetüm oder Geld in einem Betonblock sein – ein nettes Kuvert reicht uns völlig.
                 </p>
-                <p>Für Fragen und Ideen zur Feier und zu Spielen kontaktiert bitte Julia Fellner unter <a href="tel:+43 681 20592812">+43 681 20592812</a> oder <a href="mailto:julia.fellner@gmx.at">julia.fellner@gmx.at</a>.</p>
+                <p>
+                    Für Fragen und Ideen zur Feier und zu Spielen kontaktiert bitte Julia Fellner unter
+                    <a :href="`tel:${maidTel}`">{{ maidTel }}</a> oder
+                    <a :href="`mailto:${maidMail}`">{{ maidMail }}</a>.
+                </p>
             </div>
 
             <img class="leaf" src="../images/zweig.png">
@@ -209,6 +230,12 @@
             showPlusOneButton() {
                 return this.group.guests_editable && !this.group.guests.find(guest => guest.custom);
             },
+            maidTel() {
+                return atob('KzQzIDY4MSAyMDU5MjgxMg==');
+            },
+            maidMail() {
+                return atob('anVsaWEuZmVsbG5lckBnbXguYXQ=');
+            }
         },
         methods: {
             async login() {
@@ -291,6 +318,7 @@
 
     label {
         display: block;
+        text-align: left;
 
         span {
             display: block;
@@ -339,6 +367,7 @@
     }
 
     .checkbox {
+        position: relative;
         margin: 1rem 0;
 
         &::after {
@@ -359,9 +388,11 @@
         color: #fff;
         background: $main-color;
         border-radius: 3px;
+        text-align: center;
 
         &--checkmark::after {
             position: absolute;
+            left: 0;
             margin: 0.25em;
             height: 0.25em;
             width: 0.5em;
@@ -384,6 +415,76 @@
         text-align: left;
     }
 
+    .guests {
+        display: flex;
+        flex-wrap: wrap;
+        text-align: left;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        max-width: 45rem;
+    }
+
+    .guests__guest {
+        flex: 1 0 14rem;
+    }
+
+    .photographs {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .photographs__image {
+        max-width: 30rem;
+    }
+
+    .photographs__text {
+        max-width: 30rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .location {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 75rem;
+    }
+
+    .location__flowers {
+        display: none;
+        width: 25%;
+        transform: scale(1.25) translateX(-10%);
+
+        @media (min-width: 50rem) {
+            display: block;
+        }
+    }
+
+    .location__address {
+        width: 100%;
+
+        @media (min-width: 50rem) {
+            width: 25%;
+            font-size: 1.25rem;
+        }
+    }
+
+    .location__map {
+        border: 0;
+        width: 100%;
+        height: 21rem;
+
+        @media (min-width: 50rem) {
+            width: 50%;
+        }
+    }
+
     .hotels {
         display: flex;
         flex-wrap: wrap;
@@ -392,12 +493,7 @@
     }
 
     .hotels__hotel {
-        width: 50%;
+        flex: 1 0 14rem;
         margin-bottom: 1rem;
-    }
-
-    .map {
-        border: 0;
-        width: 100%;
     }
 </style>
