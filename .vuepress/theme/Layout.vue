@@ -12,6 +12,9 @@
     html {
         font-family: 'Lato', sans-serif;
         cursor: default;
+
+        font-size: 100%;
+        line-height: 1.4;
     }
 
     body {

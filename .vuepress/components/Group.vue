@@ -1,8 +1,8 @@
 <template>
     <form autocomplete="off" v-cloak>
         <transition name="fade" mode="out-in">
-            <section class="wrap wrap--entry" v-if="!group" key="entry">
-                <h1>Willkommen auf unserer Hochzeits-Website!</h1>
+            <section class="wrap wrap--s" v-if="!group" key="entry">
+                <h1 class="headline headline--small">Willkommen auf unserer Hochzeits-Website!</h1>
                 <p>Auf unserer Einladung steht ein Code, den du im unten stehenden Feld eingeben kannst, um dich anzumelden.</p>
                 <input
                     class="code"
@@ -22,11 +22,11 @@
             </section>
 
             <section v-else key="content">
-                <div class="wrap">
+                <div class="wrap wrap--l">
                     <h1>Hallo {{ group.name }}!</h1>
                     <p>
                         Wir heiraten, und das wollen wir mit euch feiern!<br>
-                        Unsere Hochzeit findet am 30. Mai 2020 beim Oberhauser statt.
+                        Unsere Hochzeit findet am <strong>30. Mai 2020</strong> beim Oberhauser statt.
                     </p>
                     <p>Hier findet ihr alle nötigen Infos. Bei weiteren Fragen, könnt ihr euch gerne an uns wenden!</p>
                     <p>Wir freuen uns auf euch!</p>
@@ -35,11 +35,14 @@
                 <img class="leaf" src="../images/zweig.png">
 
                 <div>
-                    <div class="wrap">
-                        <p>Bitte gebt uns bis 1. Februar Bescheid, ob ihr zu unserer Hochzeit kommen könnt.</p>
-                    </div>
+                    <p class="wrap wrap--l" v-if="group.guests.length > 1">
+                        Bitte gebt uns bis 1. Februar Bescheid, ob ihr zu unserer Hochzeit kommen könnt.
+                    </p>
+                    <p class="wrap" v-else>
+                        Bitte gib uns bis 1. Februar Bescheid, ob du zu unserer Hochzeit kommen kannst.
+                    </p>
 
-                    <div class="guests">
+                    <div :class="['guests', { 'guests--flex': group.guests.length > 1 }]">
                         <div class="guests__guest" v-for="guest in group.guests">
                             <template v-if="guest.custom">
                                 <h2>Begleitung</h2>
@@ -55,14 +58,14 @@
                                 <input class="checkbox__input" type="checkbox" v-model="guest.attending">
                                 <span class="checkbox__icon checkbox__icon--checkmark"></span>
                                 <span class="checkbox__label">
-                                    Ja, ich komme gerne zu eurer Hochzeit
+                                    Ja, ich komme gerne.
                                 </span>
                             </label>
                             <label class="checkbox">
                                 <input class="checkbox__input" type="checkbox" v-model="guest.vegetarian">
                                 <span class="checkbox__icon checkbox__icon--checkmark"></span>
                                 <span class="checkbox__label">
-                                    Ich möchte eine vegetarische Hauptspeise<br>
+                                    Ich möchte eine vegetarische Hauptspeise.<br>
                                     <small>(restliche Gänge sind ohnehin vegetarisch)</small>
                                 </span>
                             </label>
@@ -74,11 +77,11 @@
                             <input class="checkbox__input" type="checkbox" @change="addPlusOneGuest">
                             <span class="checkbox__icon checkbox__icon--plus">+</span>
                             <span class="checkbox__label">
-                                Ich möchte eine Begleitung mitnehmen
+                                Ich möchte eine Begleitung mitnehmen.
                             </span>
                         </label>
 
-                        <div>
+                        <div class="group">
                             <label>
                                 <span v-if="group.guests.length > 1">Eure E-Mail-Adresse (für Fotos und Updates)</span>
                                 <span v-else>Deine E-Mail-Adresse (für Fotos und Updates)</span>
@@ -107,9 +110,9 @@
 
                 <div>
                     <div class="wrap">
-                        <h2>Ablauf</h2>
+                        <h2 id="Ablauf">Ablauf</h2>
                         <p>Unser gesamtes Fest findet am Oberhauser-Hof statt.</p>
-                        <p>Um 15:00 Uhr beginnt unsere Trauung.</p>
+                        <p>Um <strong>15:00 Uhr</strong> beginnt unsere Trauung.</p>
                         <Schedule/>
                     </div>
                     <div class="photographs">
@@ -117,9 +120,9 @@
                             <img src="../images/image.jpg">
                         </div>
                         <div class="photographs__text">
-                            <p>Wir bitten euch während der Zeremonie <strong>nicht</strong> zu fotografieren.</p>
+                            <p>Wir bitten euch während der Zeremonie <strong>nicht</strong> zu fotografieren!</p>
                             <p>
-                                Wir haben eine wunderbare Fotografin, die den Tag für uns festhält.
+                                Wir haben eine wunderbare Fotografin, die den Tag für uns festhält.<br>
                                 Keine Sorge, ihr bekommt nach der Hochzeit alle Fotos per E-Mail zugeschickt.
                             </p>
                         </div>
@@ -129,7 +132,7 @@
                 <img class="leaf" src="../images/zweig.png">
 
                 <div>
-                    <h2>Anreise</h2>
+                    <h2 id="Anreise">Anreise</h2>
                     <div class="location">
                         <div class="location__flowers">
                             <img src="../images/blumen-1.png">
@@ -143,8 +146,8 @@
                     </div>
                     <div class="wrap">
                         <p>
-                            Damit ihr mit uns die Nacht durchfeiern könnt und keiner Taxi-Dienst spielen muss,
-                            organisieren wir für euch einen Shuttle-Service.
+                            Damit ihr mit uns die Nacht durchfeiern könnt und keiner Taxi spielen muss,
+                            organisieren wir für euch einen Shuttledienst.
                         </p>
                         <p>
                             Dieser bringt euch am Nachmittag rechtzeitig zur Trauung
@@ -156,14 +159,14 @@
 
                 <img class="leaf" src="../images/zweig.png">
 
-                <div class="wrap">
-                    <h2>Geschenke & Spiele</h2>
+                <div class="wrap wrap--m">
+                    <h2 id="Geschenke-und-Spiele">Geschenke & Spiele</h2>
                     <p>
                         Am meisten würden wir uns über eine finanziellen Beitrag für unsere Feier freuen.
                         Das muss kein Cellophan-Ungetüm oder Geld in einem Betonblock sein – ein nettes Kuvert reicht uns völlig.
                     </p>
                     <p>
-                        Für Fragen und Ideen zur Feier und zu Spielen kontaktiert bitte Julia Fellner unter
+                        Für Fragen und Ideen zur Feier und zu Spielen kontaktiert bitte <strong>Julia Fellner</strong> unter
                         <a :href="`tel:${maidTel}`">{{ maidTel }}</a> oder
                         <a :href="`mailto:${maidMail}`">{{ maidMail }}</a>.
                     </p>
@@ -171,31 +174,33 @@
 
                 <img class="leaf" src="../images/zweig.png">
 
-                <div class="wrap">
-                    <h2>Unterkünfte</h2>
+                <h2 class="Unterkunft">Unterkünfte</h2>
+                <div class="wrap wrap--s">
                     <p>Für unsere Gäste, die nicht aus Linz kommen, empfehlen wir folgende Hotels.</p>
                     <p>Wir selbst werden die Nacht im Hotel am Domplatz verbringen.</p>
+                </div>
+                <div class="wrap">
                     <ul class="hotels">
                         <li class="hotels__hotel">
-                            Hotel am Domplatz<br>
+                            <strong>Hotel am Domplatz</strong><br>
                             Stifterstraße 4<br>
                             <a href="tel:+43 732 773 000">+43 732 773000</a><br>
                             <a href="https://www.hotelamdomplatz.at/">www.hotelamdomplatz.at</a>
                         </li>
                         <li class="hotels__hotel">
-                            Park Inn<br>
+                            <strong>Park Inn</strong><br>
                             Hessenplatz 18<br>
                             <a href="tel:+43 732 777 100">+43 732 777 100</a><br>
                             <a href="https://www.radissonhotels.com/de-de/hotels/park-inn-linz">www.radissonhotels.com</a>
                         </li>
                         <li class="hotels__hotel">
-                            Hotel Schillerpark<br>
+                            <strong>Hotel Schillerpark</strong><br>
                             Rainerstraße 2-4<br>
                             <a href="tel:+43 732 69 50 102">+43 732 69 50-102</a><br>
                             <a href="https://www.austria-trend.at/de/hotels/schillerpark">www.austria-trend.at</a>
                         </li>
                         <li class="hotels__hotel">
-                            Ibis Linz City<br>
+                            <strong>Ibis Linz City</strong><br>
                             Kärntner Strasse 18-20<br>
                             <a href="tel:+43 732 69401">+43 732 69401</a><br>
                             <a href="https://www.accorhotels.com/de/hotel-1722-ibis-linz-city/index.shtml">www.accorhotels.com</a>
@@ -203,7 +208,9 @@
                     </ul>
                 </div>
 
-                <img src="../images/blumen-2.png">
+                <div class="footer">
+                    <img class="footer__flower" src="../images/blumen-2.png">
+                </div>
             </section>
         </transition>
     </form>
@@ -278,13 +285,31 @@
     }
 
     section {
-        margin: 2.5rem auto 5rem;
+        margin-left: auto;
+        margin-right: auto;
         text-align: center;
     }
 
-    h1, h2 {
-        margin-top: 2rem;
+    h1 {
+        font-size: 1.725rem;
+        margin-top: 2.5rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .headline {}
+
+    .headline--small {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        margin-top: 1rem;
         margin-bottom: 1rem;
+    }
+
+    a {
+        white-space: nowrap;
     }
 
     .wrap {
@@ -294,8 +319,16 @@
         padding-right: 1rem;
         max-width: 30rem;
 
-        &--entry {
+        &--s {
             max-width: 20rem;
+        }
+
+        &--m {
+            max-width: 40rem;
+        }
+
+        &--l {
+            max-width: 60rem;
         }
     }
 
@@ -334,6 +367,8 @@
 
     label {
         display: block;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
         text-align: left;
 
         span {
@@ -345,7 +380,6 @@
     [type="email"],
     textarea {
         width: 100%;
-        margin: 0.5rem 0 1rem;
         padding: 0.5rem;
         font-size: inherit;
         font-family: inherit;
@@ -357,6 +391,11 @@
     input:focus,
     textarea:focus {
         @include focusStyle;
+    }
+
+    span + input,
+    span + textarea {
+        margin-top: 0.25rem;
     }
 
     .code {
@@ -432,18 +471,26 @@
     }
 
     .guests {
-        display: flex;
-        flex-wrap: wrap;
-        text-align: left;
         margin-left: auto;
         margin-right: auto;
         padding-left: 1rem;
         padding-right: 1rem;
-        max-width: 45rem;
+        max-width: 30rem;
+        text-align: left;
+
+        &--flex {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 45rem;
+        }
     }
 
     .guests__guest {
         flex: 1 0 14rem;
+    }
+
+    .group {
+        margin-top: 2rem;
     }
 
     .photographs {
@@ -459,9 +506,14 @@
     }
 
     .photographs__text {
-        max-width: 30rem;
         padding-left: 1rem;
         padding-right: 1rem;
+        max-width: 45rem;
+
+        @media (min-width: 60rem) {
+            padding-left: 4rem;
+            padding-right: 4rem;
+        }
     }
 
     .location {
@@ -492,6 +544,7 @@
         @media (min-width: 50rem) {
             width: 25%;
             font-size: 1.25rem;
+            font-weight: lighter;
         }
     }
 
@@ -515,5 +568,13 @@
     .hotels__hotel {
         flex: 1 0 14rem;
         margin-bottom: 1rem;
+    }
+
+    .footer {
+        overflow: hidden;
+        margin: 2rem auto;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        max-width: 24rem;
     }
 </style>
