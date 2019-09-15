@@ -254,6 +254,7 @@
                     this.group = result.data;
                 } catch (error) {
                     this.group = null;
+                    alert('Sorry, das ist leider der falsche Code!');
                 }
                 this.isLoading = false;
             },
@@ -263,6 +264,7 @@
                     ...this.group,
                 }, { headers: this.headers });
                 this.isLoading = false;
+                alert('Danke, deine Änderungen wurden gespeichert!');
             },
             addPlusOneGuest() {
                 this.group.guests.push({
