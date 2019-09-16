@@ -120,7 +120,7 @@
                             <img src="../images/image.jpg">
                         </div>
                         <div class="photographs__text">
-                            <p>Wir bitten euch während der Zeremonie <strong>nicht</strong> zu fotografieren!</p>
+                            <p>Wir bitten euch während der Zeremonie <strong>NICHT</strong> zu fotografieren!</p>
                             <p>
                                 Wir haben eine wunderbare Fotografin, die den Tag für uns festhält.<br>
                                 Keine Sorge, ihr bekommt nach der Hochzeit alle Fotos per E-Mail zugeschickt.
@@ -446,6 +446,7 @@
         background: $main-color;
         border-radius: 3px;
         text-align: center;
+        line-height: 1.2;
 
         &--checkmark::after {
             position: absolute;
@@ -527,6 +528,7 @@
             display: flex;
             flex-wrap: wrap;
             align-items: center;
+            margin-bottom: 2rem;
         }
     }
 

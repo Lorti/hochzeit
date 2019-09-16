@@ -1,7 +1,7 @@
 <template>
     <ul class="schedule">
         <li class="schedule__item">
-            <strong class="schedule__text">Trauung</strong>
+            <span class="schedule__text">Trauung</span>
             <span class="schedule__horizontal-line"></span>
             <img class="schedule__image" src="../images/rings.svg">
         </li>
