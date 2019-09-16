@@ -1,65 +1,53 @@
 <template>
-    <div>
-        <div class="hero" :style="{ backgroundImage: `url(/graukogel.jpg)` }">
-            <h1>Teresa & Manuel<br><small>30.5.20</small></h1>
-        </div>
-        <Content class="content" :custom="false"/>
-    </div>
+    <Content class="content" :custom="false"/>
 </template>
 
-<script>
-    export default {
-        computed: {
-            data() {
-                return this.$page.frontmatter
-            },
-        }
-    }
-</script>
-
-<style src="../../node_modules/@vuepress/theme-default/styles/index.styl" lang="stylus"></style>
-
 <style lang="scss">
-    @import url('https://fonts.googleapis.com/css?family=Sacramento');
+    @import "./config";
 
-    .hero {
-        background-position: 61% center;
-        background-size: cover;
-        height: 100vh;
+    * {
+        box-sizing: border-box;
+    }
 
-        h1 {
-            position: absolute;
-            top: 5vh;
-            margin: 0;
-            width: 100%;
-            text-align: center;
-            font-family: 'Sacramento', cursive;
-            font-weight: lighter;
-            color: #fff;
+    html {
+        font-family: 'Lato', sans-serif;
+        cursor: default;
 
-            @media (min-width: 1024px) {
-                width: auto;
-                top: 50vh;
-                left: 25vh;
-                transform: translateY(-50%);
-            }
-        }
+        font-size: 100%;
+        line-height: 1.4;
+    }
 
-        h1 {
-            font-size: 3rem;
-            line-height: 1;
-        }
+    body {
+        margin: 0;
+    }
 
-        small {
-            font-size: 2rem;
-            line-height: 1;
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Abril Fatface', serif;
+        font-weight: normal;
+    }
+
+    a {
+        color: $main-color;
+        text-decoration: none;
+
+        &:hover {
+            color: $hover-color;
+            text-decoration: underline;
         }
     }
 
-    .content {
-        display: block;
-        margin: 0 auto;
-        padding: 2rem;
-        max-width: 48rem;
+    .header-anchor {
+        display: none;
+    }
+
+    ::selection {
+        color: #fff;
+        background: $main-color;
+    }
+
+    @media (min-width: 1280px) {
+        html {
+            font-size: 112.5%;
+        }
     }
 </style>
