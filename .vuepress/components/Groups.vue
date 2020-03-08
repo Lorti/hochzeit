@@ -32,7 +32,7 @@
             <ul>
                 <li>{{ groups.length }} Gruppen</li>
                 <li>{{ guests.length }} Gäste</li>
-                <li>{{ guests.filter(guest => guest.email).length }} E-Mail-Adressen</li>
+                <li>{{ groups.filter(group => group.email).length }} E-Mail-Adressen</li>
                 <li>{{ guests.filter(guest => guest.attending).length }} Zusagen</li>
                 <li>{{ guests.filter(guest => guest.vegetarian).length }} vegetarische Hauptspeisen</li>
                 <li>{{ guests.filter(guest => guest.custom).length }} +1s</li>
