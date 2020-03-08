@@ -174,6 +174,7 @@
                             Sobald ihr heimfahren wollt, meldet euch bitte bei <strong>Daniel Timelthaler</strong>
                             (<a :href="`tel:${daniTel}`">{{ daniTel }}</a>).
                         </p>
+                        <p>Bei der Rückfahrt wird vom Taxifahrer ein Unkostenbeitrag von 5 € pro Person kassiert.</p>
                         <h3>Anmeldung zum Shuttledienst</h3>
                         <p>
                             Bitte gebt uns bis <strong>1. April</strong> Bescheid, ob ihr den Shuttle nutzen wollt.
