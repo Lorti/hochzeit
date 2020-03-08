@@ -17,7 +17,8 @@
         <template v-else>
             <h1>
                 Gästeliste
-                <button @click="fetch" :disabled="isLoading">Liste aktualisieren</button>
+                <button @click.prevent="fetch" :disabled="isLoading">Liste aktualisieren</button>
+                <button @click.prevent="copyBcc">E-Mail-Adressen kopieren</button>
                 <select v-model="order">
                     <option value="group">Gruppe</option>
                     <option value="name">Name</option>
@@ -25,6 +26,7 @@
                     <option value="attending">Zusage?</option>
                     <option value="vegetarian">Vegetarisch?</option>
                     <option value="custom">+1?</option>
+                    <option value="shuttle">Shuttle?</option>
                 </select>
             </h1>
             <ul>
@@ -34,6 +36,7 @@
                 <li>{{ guests.filter(guest => guest.attending).length }} Zusagen</li>
                 <li>{{ guests.filter(guest => guest.vegetarian).length }} vegetarische Hauptspeisen</li>
                 <li>{{ guests.filter(guest => guest.custom).length }} +1s</li>
+                <li>{{ guests.filter(guest => guest.shuttle).length }} Fahrgäste für Shuttle(s)</li>
             </ul>
             <table>
                 <tr>
@@ -46,6 +49,7 @@
                     <th>Vegetarisch?</th>
                     <th>+1?</th>
                     <th>Gruppe darf +1 hinzufügen</th>
+                    <th>Shuttle?</th>
                     <th>Anmerkungen</th>
                 </tr>
                 <tr v-for="guest in sortedGuests">
@@ -90,11 +94,17 @@
                             vegetarian: guest.vegetarian,
                             custom: guest.custom,
                             guests_editable: group.guests_editable,
+                            shuttle: group.shuttle,
                             message: group.message,
                         })
                     });
                     return accumulator;
                 }, []);
+            },
+            bcc() {
+                return this.groups
+                    .map((group) => group.email)
+                    .filter((email) => email.length);
             },
             sortedGuests() {
                 return this.guests.sort((a, b) => {
@@ -115,6 +125,23 @@
                 this.groups = result.data;
                 this.isLoading = false;
             },
+            copyBcc() {
+                window.prompt('E-Mail-Adressen', this.bcc);
+            }
         }
     }
 </script>
+
+<style>
+    table {
+        border-collapse: collapse;
+    }
+    th {
+        position: sticky;
+        top: 0;
+        background: #fff
+    }
+    th, td {
+        border: 1px solid hsl(0, 0%, 95%);
+    }
+</style>

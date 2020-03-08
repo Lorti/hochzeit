@@ -37,6 +37,7 @@ exports.handler = function (event, context, callback) {
                     email: group.content.email,
                     guests: group.content.guests,
                     guests_editable: group.content.guests_editable,
+                    shuttle: Boolean(group.content.shuttle),
                     message: group.content.message,
                 }));
                 respond(200, guests);

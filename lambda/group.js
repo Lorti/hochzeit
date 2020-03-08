@@ -35,6 +35,7 @@ exports.handler = function (event, context, callback) {
                         email: group.content.email,
                         guests: group.content.guests,
                         guests_editable: group.content.guests_editable,
+                        shuttle: group.content.shuttle,
                         message: group.content.message,
                     });
                 } else {
@@ -58,6 +59,7 @@ exports.handler = function (event, context, callback) {
             vegetarian: Boolean(guest.vegetarian),
             custom: Boolean(guest.custom),
         }));
+        const shuttle = Boolean(request.shuttle);
         const message = String(request.message);
 
         const Storyblok = new StoryblokClient({
@@ -89,6 +91,7 @@ exports.handler = function (event, context, callback) {
                         email,
                         guests,
                         guests_editable: story.content.guests_editable,
+                        shuttle,
                         message,
                     },
                 },

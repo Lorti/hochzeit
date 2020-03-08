@@ -36,10 +36,10 @@
 
                 <div>
                     <p class="wrap wrap--l" v-if="group.guests.length > 1">
-                        Bitte gebt uns bis 1. Februar Bescheid, ob ihr zu unserer Hochzeit kommen könnt.
+                        Bitte gebt uns bis <strong>1. Februar</strong> Bescheid, ob ihr zu unserer Hochzeit kommen könnt.
                     </p>
                     <p class="wrap" v-else>
-                        Bitte gib uns bis 1. Februar Bescheid, ob du zu unserer Hochzeit kommen kannst.
+                        Bitte gib uns bis <strong>1. Februar</strong> Bescheid, ob du zu unserer Hochzeit kommen kannst.
                     </p>
 
                     <div :class="['guests', { 'guests--flex': group.guests.length > 1 }]">
@@ -82,6 +82,14 @@
                         </label>
 
                         <div class="group">
+                            <label class="checkbox">
+                                <input class="checkbox__input" type="checkbox" v-model="group.shuttle">
+                                <span class="checkbox__icon checkbox__icon--checkmark"></span>
+                                <span class="checkbox__label">
+                                    <template v-if="group.guests.length > 1">Wir möchten beim Shuttle mitfahren.</template>
+                                    <template v-else>Ich möchte beim Shuttle mitfahren.</template>
+                                </span>
+                            </label>
                             <label>
                                 <span v-if="group.guests.length > 1">Eure E-Mail-Adresse (für Fotos und Updates)</span>
                                 <span v-else>Deine E-Mail-Adresse (für Fotos und Updates)</span>
@@ -111,7 +119,7 @@
                 <div>
                     <div class="wrap">
                         <h2 id="Ablauf">Ablauf</h2>
-                        <p>Unser gesamtes Fest findet am Oberhauser-Hof statt.</p>
+                        <p>Unser gesamtes Fest findet am <strong>Oberhauser</strong>-Hof statt.</p>
                         <p>Um <strong>15:00 Uhr</strong> beginnt unsere Trauung.</p>
                         <Schedule/>
                     </div>
@@ -123,7 +131,7 @@
                             <p>Wir bitten euch während der Zeremonie <strong>NICHT</strong> zu fotografieren!</p>
                             <p>
                                 Wir haben eine wunderbare Fotografin, die den Tag für uns festhält.<br>
-                                Keine Sorge, ihr bekommt nach der Hochzeit alle Fotos per E-Mail zugeschickt.
+                                Keine Sorge, ihr bekommt nach der Hochzeit <strong>alle Fotos per E-Mail</strong> zugeschickt.
                             </p>
                         </div>
                     </div>
@@ -147,13 +155,30 @@
                     <div class="wrap">
                         <p>
                             Damit ihr mit uns die Nacht durchfeiern könnt und keiner Taxi spielen muss,
-                            organisieren wir für euch einen Shuttledienst.
+                            organisieren wir für euch einen <strong>Shuttledienst</strong>.
                         </p>
                         <p>
                             Dieser bringt euch am Nachmittag rechtzeitig zur Trauung
-                            und in der Nacht stündlich wieder zurück nach Linz.
+                            und in der Nacht wieder zurück nach Linz.
                         </p>
-                        <p>Details dazu folgen noch.</p>
+                        <h3>Hinfahrt</h3>
+                        <p>
+                            Abfahrt des Shuttles am Nachmittag ist am <strong>Domplatz</strong>.
+                            Die Vans fahren euch in zwei Durchgängen zum Oberhauser.
+                            Wer wann mitfährt wird noch eingeteilt, wir geben euch rechtzeitig Bescheid.
+                        </p>
+                        <h3>Rückfahrt</h3>
+                        <p>
+                            Am Abend fährt der Shuttle zwischen <strong>23:30 Uhr und 3:30 Uhr</strong>
+                            zurück ins <strong>Linzer Zentrum</strong>.
+                            Sobald ihr heimfahren wollt, meldet euch bitte bei <strong>Daniel Timelthaler</strong>
+                            (<a :href="`tel:${daniTel}`">{{ daniTel }}</a>).
+                        </p>
+                        <h3>Anmeldung zum Shuttledienst</h3>
+                        <p>
+                            Bitte gebt uns bis <strong>1. April</strong> Bescheid, ob ihr den Shuttle nutzen wollt.
+                            Ihr könnt das ganz einfach oben im Formular eintragen.
+                        </p>
                     </div>
                 </div>
 
@@ -167,8 +192,8 @@
                     </p>
                     <p>
                         Für Fragen und Ideen zur Feier und zu Spielen kontaktiert bitte <strong>Julia Fellner</strong> unter
-                        <a :href="`tel:${maidTel}`">{{ maidTel }}</a> oder
-                        <a :href="`mailto:${maidMail}`">{{ maidMail }}</a>.
+                        <a :href="`tel:${julieTel}`">{{ julieTel }}</a> oder
+                        <a :href="`mailto:${julieMail}`">{{ julieMail }}</a>.
                     </p>
                 </div>
 
@@ -239,10 +264,13 @@
             showPlusOneButton() {
                 return this.group.guests_editable && !this.group.guests.find(guest => guest.custom);
             },
-            maidTel() {
+            daniTel() {
+                return atob('KzQzIDY4MCAyMTQ5NzYy');
+            },
+            julieTel() {
                 return atob('KzQzIDY4MSAyMDU5MjgxMg==');
             },
-            maidMail() {
+            julieMail() {
                 return atob('anVsaWEuZmVsbG5lckBnbXguYXQ=');
             }
         },
