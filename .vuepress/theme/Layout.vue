@@ -1,5 +1,5 @@
 <template>
-    <Content class="content" :custom="false"/>
+    <Content/>
 </template>
 
 <style lang="scss">
@@ -34,10 +34,6 @@
             color: $hover-color;
             text-decoration: underline;
         }
-    }
-
-    .header-anchor {
-        display: none;
     }
 
     ::selection {
