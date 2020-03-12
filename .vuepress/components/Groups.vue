@@ -94,7 +94,7 @@
                             vegetarian: guest.vegetarian,
                             custom: guest.custom,
                             guests_editable: group.guests_editable,
-                            shuttle: group.shuttle,
+                            shuttle: guest.attending && group.shuttle,
                             message: group.message,
                         })
                     });
