@@ -26,7 +26,7 @@
                     <h1>Hallo {{ group.name }}!</h1>
                     <p>
                         Wir heiraten, und das wollen wir mit euch feiern!<br>
-                        Unsere Hochzeit findet am <strong>30. Mai 2020</strong> beim Oberhauser statt.
+                        Unsere Hochzeit findet am <strong>1. Mai 2021</strong> beim Oberhauser statt.
                     </p>
                     <p>Hier findet ihr alle nötigen Infos. Bei weiteren Fragen, könnt ihr euch gerne an uns wenden!</p>
                     <p>Wir freuen uns auf euch!</p>
@@ -36,10 +36,10 @@
 
                 <div>
                     <p class="wrap wrap--l" v-if="group.guests.length > 1">
-                        Bitte gebt uns bis <strong>1. Februar</strong> Bescheid, ob ihr zu unserer Hochzeit kommen könnt.
+                        Bitte gebt uns Bescheid, ob ihr zu unserer Hochzeit kommen könnt.
                     </p>
                     <p class="wrap" v-else>
-                        Bitte gib uns bis <strong>1. Februar</strong> Bescheid, ob du zu unserer Hochzeit kommen kannst.
+                        Bitte gib uns Bescheid, ob du zu unserer Hochzeit kommen kannst.
                     </p>
 
                     <div :class="['guests', { 'guests--flex': group.guests.length > 1 }]">
@@ -177,7 +177,7 @@
                         <p>Bei der Rückfahrt wird vom Taxifahrer ein Unkostenbeitrag von 5 € pro Person kassiert.</p>
                         <h3>Anmeldung zum Shuttledienst</h3>
                         <p>
-                            Bitte gebt uns bis <strong>1. April</strong> Bescheid, ob ihr den Shuttle nutzen wollt.
+                            Bitte gebt uns bis Bescheid, ob ihr den Shuttle nutzen wollt.
                             Ihr könnt das ganz einfach oben im Formular eintragen.
                         </p>
                     </div>
