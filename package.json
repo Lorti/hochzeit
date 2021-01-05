@@ -7,7 +7,7 @@
     "build": "npm run site:build && npm run lambda:build"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "netlify-lambda": "^1.6.3",
     "node-sass": "^4.13.1",
     "npm-check": "^5.9.2",
