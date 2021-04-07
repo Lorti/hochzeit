@@ -26,7 +26,7 @@
                     <h1>Hallo {{ group.name }}!</h1>
                     <p>
                         Wir heiraten, und das wollen wir mit euch feiern!<br>
-                        Unsere Hochzeit findet am <strong>1. Mai 2021</strong> beim Oberhauser statt.
+                        Unsere Hochzeit findet am <strong>Donnerstag, 29. Juli 2021</strong> beim Oberhauser statt.
                     </p>
                     <p>Hier findet ihr alle nötigen Infos. Bei weiteren Fragen, könnt ihr euch gerne an uns wenden!</p>
                     <p>Wir freuen uns auf euch!</p>
