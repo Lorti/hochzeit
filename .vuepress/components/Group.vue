@@ -163,23 +163,18 @@
                         </p>
                         <h3>Hinfahrt</h3>
                         <p>
-                            Abfahrt des Shuttles am Nachmittag ist am <strong>Domplatz</strong>.
-                            Die Vans fahren euch in zwei Durchgängen zum Oberhauser.
-                            Wer wann mitfährt wird noch eingeteilt, wir geben euch rechtzeitig Bescheid.
+                          Der Shuttle fährt um 13:50 Uhr vom <strong>Domplatz</strong> ab,
+                          damit ihr rechtzeitig um 14:30 Uhr beim Oberhauser seid.
                         </p>
                         <h3>Rückfahrt</h3>
                         <p>
-                            Am Abend fährt der Shuttle zwischen <strong>23:30 Uhr und 3:30 Uhr</strong>
-                            zurück ins <strong>Linzer Zentrum</strong>.
-                            Sobald ihr heimfahren wollt, meldet euch bitte bei <strong>Daniel Timelthaler</strong>
-                            (<a :href="`tel:${daniTel}`">{{ daniTel }}</a>).
+                          Der Shuttle fährt um <strong>00:30 Uhr, 01:30 Uhr und 02:30 Uhr</strong>
+                          zurück zum <strong>Domplatz</strong>. Bitte gebt am Abend
+                          <strong>Daniel Timelthaler</strong> (<a :href="`tel:${daniTel}`">{{ daniTel }}</a>)
+                          Bescheid mit welchem Shuttle ihr zurückfahren wollt.
+                          Die Vans starten erst, wenn mindestens 5 Fahrgäste mitfahren.
                         </p>
                         <p>Bei der Rückfahrt wird vom Taxifahrer ein Unkostenbeitrag von 5 € pro Person kassiert.</p>
-                        <h3>Anmeldung zum Shuttledienst</h3>
-                        <p>
-                            Bitte gebt uns bis Bescheid, ob ihr den Shuttle nutzen wollt.
-                            Ihr könnt das ganz einfach oben im Formular eintragen.
-                        </p>
                     </div>
                 </div>
 
