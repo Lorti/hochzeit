@@ -163,14 +163,20 @@
                         </p>
                         <h3>Hinfahrt</h3>
                         <p>
-                          Der Shuttle fährt um 13:50 Uhr vom <strong>Domplatz</strong> ab,
-                          damit ihr rechtzeitig um 14:30 Uhr beim Oberhauser seid.
+                          Der Shuttle fährt um <strong>13:50 Uhr</strong> vom <strong>Domplatz</strong> ab,
+                          damit ihr rechtzeitig um <strong>14:30 Uhr</strong> beim Oberhauser seid.
                         </p>
                         <h3>Rückfahrt</h3>
                         <p>
-                          Der Shuttle fährt um <strong>00:30 Uhr, 01:30 Uhr und 02:30 Uhr</strong>
-                          zurück zum <strong>Domplatz</strong>. Bitte gebt am Abend
-                          <strong>Daniel Timelthaler</strong> (<a :href="`tel:${daniTel}`">{{ daniTel }}</a>)
+                          Der Shuttle fährt um
+                          <strong>00:30 Uhr</strong>,
+                          <strong>01:30 Uhr</strong> und
+                          <strong>02:30 Uhr</strong>
+                          zurück zum <strong>Domplatz</strong>.
+                        </p>
+                        <p>
+                          Bitte gebt am Abend <strong>Daniel Timelthaler</strong>
+                          (<a :href="`tel:${daniTel}`">{{ daniTel }}</a>)
                           Bescheid mit welchem Shuttle ihr zurückfahren wollt.
                           Die Vans starten erst, wenn mindestens 5 Fahrgäste mitfahren.
                         </p>
