@@ -1,5 +1,5 @@
 module.exports = {
-    title: 'Teresa & Manuel',
+    title: 'Teresa & Manuel | 29. Juli 2021',
     head: [
         ['link', { href: 'https://fonts.googleapis.com/css?family=Abril+Fatface|Lato:light,normal,bold&display=swap', rel: 'stylesheet' }]
     ],
