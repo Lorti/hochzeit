@@ -35,13 +35,29 @@ export default {
 
 .category {
   display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
+
+  @media (min-width: 30rem) {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: normal;
+  }
 }
 
 .category__text {
   display: flex;
   flex-direction: column;
-  margin-right: 3rem;
+  width: 100%;
+  margin-bottom: 1.5rem;
+
+  @media (min-width: 30rem) {
+    width: 18rem;
+    min-width: 18rem;
+    margin-bottom: 0;
+  }
 }
 
 .category__title {

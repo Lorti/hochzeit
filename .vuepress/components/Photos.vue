@@ -21,14 +21,14 @@
       <main v-else key="content">
         <h1 class="row">Danke für einen unvergesslichen Tag!</h1>
         <PhotoCategory class="row"
-                       title="Lovebirds (284)"
+                       title="Lovebirds"
                        :dropbox-link="photos.lovebirdsDropboxLink"
                        :we-transfer-link="photos.lovebirdsWeTransferLink"
                        teaser1="/lovebirds-1.jpg"
                        teaser2="/lovebirds-2.jpg"
                        teaser3="/lovebirds-3.jpg"/>
         <PhotoCategory class="row"
-                       title="Trauung (217)"
+                       title="Trauung"
                        :tilt-shift="true"
                        :dropbox-link="photos.weddingCeremonyDropboxLink"
                        :we-transfer-link="photos.weddingCeremonyWeTransferLink"
@@ -36,14 +36,14 @@
                        teaser2="/trauung-2.jpg"
                        teaser3="/trauung-3.jpg"/>
         <PhotoCategory class="row"
-                       title="Fest & Details (437)"
+                       title="Fest & Details"
                        :dropbox-link="photos.partyDropboxLink"
                        :we-transfer-link="photos.partyWeTransferLink"
                        teaser1="/feier-1.jpg"
                        teaser2="/feier-2.jpg"
                        teaser3="/feier-3.jpg"/>
         <PhotoCategory class="row"
-                       title="Gruppenfotos (62)"
+                       title="Gruppenfotos"
                        :tilt-shift="true"
                        :dropbox-link="photos.groupPicturesDropboxLink"
                        :we-transfer-link="photos.groupPicturesWeTransferLink"
@@ -51,7 +51,7 @@
                        teaser2="/gruppenfotos-2.jpg"
                        teaser3="/gruppenfotos-3.jpg"/>
         <PhotoCategory class="row"
-                       title="Fotobox, Greetix & Handyvideos (158)"
+                       title="Fotobox, Greetix & Handyvideos"
                        :dropbox-link="photos.guestAdditionsDropboxLink"
                        :we-transfer-link="photos.guestAdditionsWeTransferLink"
                        teaser1="/fotobox-1.jpg"
@@ -66,10 +66,6 @@
 
 <script>
 import PhotoCategory from './PhotoCategory.vue';
-
-// TODO Mobile?
-// TODO Bilder komprimieren
-// TODO Links in Storyblok
 
 export default {
   components: {
@@ -105,6 +101,7 @@ export default {
         localStorage.setItem('password', this.password);
       } catch (error) {
         this.photos = null;
+        localStorage.removeItem('password');
         alert('Sorry, das ist leider der falsche Code!');
       }
       this.isLoading = false;
@@ -187,13 +184,22 @@ button {
   &--topLeft {
     top: 0;
     left: 0;
+    width: 255px;
+    height: 174px;
     transform: translate(-35%, -35%);
   }
 
   &--bottomRight {
     right: 0;
     bottom: 0;
+    width: 212px;
+    height: 150px;
     transform: translate(35%, 35%);
+  }
+
+  @media (min-width: 60rem) {
+    width: auto;
+    height: auto;
   }
 }
 

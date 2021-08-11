@@ -25,7 +25,7 @@ exports.handler = function (event, context, callback) {
                 const photos = response.data.stories.find(story => story.content.password === password());
 
                 if (photos) {
-                    console.log(200, {
+                    respond(200, {
                         lovebirdsDropboxLink: photos.content.lovebirdsDropboxLink,
                         lovebirdsWeTransferLink: photos.content.lovebirdsWeTransferLink,
 
