@@ -3,7 +3,7 @@
     <div class="category__text">
       <h2 class="category__title">{{ title }}</h2>
       <a class="category__link" :href="dropboxLink">Fotos auf Dropbox ansehen</a>
-      <a class="category__link" :href="weTransferLink">Fotos über WeTransfer herunterladen</a>
+      <a class="category__link" :href="weTransferLink">Fotos herunterladen</a>
     </div>
     <Frame class="category__teaser" :src="teaser1" :tilt="tiltShift ? 'left' : 'right'"/>
     <Frame class="category__teaser" :src="teaser2" :tilt="tiltShift ? 'right' : 'left'"/>

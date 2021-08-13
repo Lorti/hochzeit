@@ -1,7 +1,7 @@
 <template>
   <div v-cloak>
     <transition name="fade" mode="out-in">
-      <form class="wrap wrap--s" v-if="!photos" key="entry">
+      <form autocomplete="off" class="wrap wrap--s" v-if="!photos" key="entry">
         <input
             class="code"
             type="text"
@@ -51,7 +51,7 @@
                        teaser2="/gruppenfotos-2.jpg"
                        teaser3="/gruppenfotos-3.jpg"/>
         <PhotoCategory class="row"
-                       title="Fotobox, Greetix & Handyvideos"
+                       title="Fotobox, Greetix & Handyfotos/-videos"
                        :dropbox-link="photos.guestAdditionsDropboxLink"
                        :we-transfer-link="photos.guestAdditionsWeTransferLink"
                        teaser1="/fotobox-1.jpg"
