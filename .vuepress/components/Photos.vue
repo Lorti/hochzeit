@@ -85,24 +85,15 @@ export default {
       };
     },
   },
-  created() {
-    const password = localStorage.getItem('password');
-    if (password) {
-      this.password = password;
-      this.login();
-    }
-  },
   methods: {
     async login() {
       this.isLoading = true;
       try {
         const result = await this.$axios.get('/photos', {headers: this.headers});
         this.photos = result.data;
-        localStorage.setItem('password', this.password);
       } catch (error) {
-        this.photos = null;
-        localStorage.removeItem('password');
         alert('Sorry, das ist leider der falsche Code!');
+        this.photos = null;
       }
       this.isLoading = false;
     },
