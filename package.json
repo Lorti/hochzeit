@@ -9,7 +9,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "netlify-lambda": "^1.6.3",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "npm-check": "^5.9.2",
     "sass-loader": "^8.0.2",
     "storyblok-js-client": "^2.2.0",
